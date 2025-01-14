@@ -1,0 +1,70 @@
+@import 'variables';
+@import 'mixins';
+@import '@splidejs/react-splide/css/core';
+
+.splide__list {
+  cursor: grab;
+}
+
+.splide__pagination {
+  display: none;
+}
+
+.splide__slide.is-active {
+  opacity: 1 !important;
+}
+
+.splide__slide {
+  opacity: 0.2;
+}
+
+.splide__arrows {
+  display: flex;
+  justify-content: center;
+  position: relative;
+  top: 0px;
+  z-index: 2;
+}
+
+.splide__arrow {
+  position: absolute;
+  border: none;
+  background-color: inherit;
+  cursor: pointer;
+}
+
+.splide__arrow svg {
+  @include svg-link(stroke, $base-color);
+}
+
+.splide__arrow:hover svg {
+  @include svg-link-hover(stroke, rgba(146, 55, 212, 0.5019607843));
+}
+
+.splide__arrow--next {
+  right: calc(33.3333% - 0.666667rem + 1rem);
+}
+
+.splide__arrow--prev {
+  left: calc(33.3333% - 0.666667rem + 1rem);
+}
+
+@media screen and (max-width: $tablet-query) {
+  .splide__arrow--next {
+    right: 0;
+  }
+
+  .splide__arrow--prev {
+    left: 0;
+  }
+}
+
+@media screen and (max-width: 500px) {
+  .splide__arrow--next {
+    right: 0;
+  }
+
+  .splide__arrow--prev {
+    left: 0;
+  }
+}

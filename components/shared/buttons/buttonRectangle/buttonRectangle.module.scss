@@ -1,0 +1,55 @@
+@import '/styles/variables';
+
+.button {
+  width: 390px;
+  height: 80px;
+  border: none;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: $accent-gradient-color;
+  box-shadow: 0px 0px 20px 0px rgba(188, 113, 241, 0.5);
+
+  .button_text {
+    font-family: var(--cocomat), sans-serif;
+    font-size: 18px;
+    font-weight: 700;
+    line-height: 140%;
+    letter-spacing: 0.36px;
+    text-transform: uppercase;
+    color: $base-color;
+  }
+
+  &:enabled {
+    &:hover {
+      cursor: pointer;
+    }
+  }
+
+  &:disabled {
+    cursor: default;
+    opacity: 0.5;
+  }
+}
+
+@media screen and (max-width: $laptop-query) {
+  .button {
+    width: 300px;
+    height: 70px;
+    .button_text {
+      font-size: 16px;
+      letter-spacing: 0.32px;
+    }
+  }
+}
+
+@media screen and (max-width: $tablet-query) {
+  .button {
+    width: 235px;
+    height: 60px;
+    .button_text {
+      font-size: 15px;
+      letter-spacing: 0.3px;
+    }
+  }
+}

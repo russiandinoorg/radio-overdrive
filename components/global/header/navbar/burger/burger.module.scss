@@ -1,0 +1,52 @@
+@import '/styles/variables';
+
+.burger {
+  width: 28px;
+  height: 17px;
+  position: absolute;
+  right: $base-margin-mobile;
+  top: 31.5px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  z-index: 11;
+  grid-column: 2/3;
+  align-self: center;
+  justify-self: end;
+  background-color: inherit;
+  border: none;
+  cursor: pointer;
+
+  &__line {
+    width: 28px;
+    height: 2px;
+    background-color: $base-color;
+    border-radius: 2px;
+    transform-origin: left center;
+    transition: all 0.3s ease;
+
+    &:first-of-type {
+      .menuOpen & {
+        transform: rotate(44deg) translate3d(-2px, 0, 0);
+      }
+    }
+
+    &:nth-of-type(2) {
+      .menuOpen & {
+        opacity: 0;
+      }
+    }
+
+    &:last-of-type {
+      .menuOpen & {
+        transform: rotate(-46deg) translate3d(-4px, 0, 0);
+      }
+    }
+  }
+}
+
+@media screen and (min-width: 1025px) {
+  .burger {
+    display: none;
+  }
+}

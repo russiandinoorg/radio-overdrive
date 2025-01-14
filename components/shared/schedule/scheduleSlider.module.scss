@@ -1,0 +1,32 @@
+@import '/styles/variables';
+
+.container {
+  display: grid;
+}
+
+.title {
+  padding-bottom: 50px;
+  border-bottom: 2px solid #9237d480;
+  text-align: center;
+}
+
+@media screen and (max-width: $tablet-query) {
+  .title {
+    padding-bottom: 35px;
+  }
+}
+
+.card {
+  display: grid;
+  justify-content: center;
+  gap: 12px;
+  padding: 25px 0;
+  border-bottom: 2px solid #9237d480;
+  text-align: center;
+}
+
+@media screen and (max-width: $laptop-query) {
+  .card {
+    padding: 20px 0;
+  }
+}

@@ -1,0 +1,28 @@
+// theme colors
+$base-color: #fff;
+$base-background-color: #000;
+$accent-color: #5b31c0;
+$accent-color-two: #9337d4;
+$accent-gradient-color: linear-gradient(100deg, #9337d4 2.28%, #5b31c0 91.54%);
+
+// helpers
+$banner-shadow: 100px;
+
+// margins and paddings
+$base-width: 90vw;
+$base-width-mobile: 85vw;
+$base-padding: 180px;
+$base-padding-laptop: 120px;
+$base-padding-tablet: 100px;
+$base-padding-mobile: 75px;
+$base-margin: (100vw - $base-width)/2;
+$base-margin-mobile: (100vw - $base-width-mobile)/2;
+
+// media queries
+$laptop-query: 1440px;
+$tablet-query: 1024px;
+$mobile-query: 744px;
+
+// animation
+$base-transition: all 0.3s ease-in-out 0s;
+$instant-transition: all 0.01s ease-in-out 0s;

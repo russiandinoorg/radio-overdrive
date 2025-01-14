@@ -1,0 +1,54 @@
+@import '/styles/variables';
+
+.container {
+  width: $base-width;
+  margin: 0 auto;
+  padding-top: $base-padding;
+}
+
+.title {
+  margin-bottom: 120px;
+}
+
+@media screen and (max-width: $laptop-query) {
+  .container {
+    padding-top: $base-padding-laptop;
+  }
+
+  .title {
+    margin-bottom: 80px;
+  }
+}
+
+@media screen and (max-width: 1280px) {
+  .container {
+    width: 85vw;
+  }
+}
+
+@media screen and (max-width: 1170px) {
+  .container {
+    width: 82vw;
+  }
+}
+
+@media screen and (max-width: $tablet-query) {
+  .container {
+    padding-top: $base-padding-tablet;
+  }
+
+  .title {
+    margin-bottom: 60px;
+  }
+}
+
+@media screen and (max-width: $mobile-query) {
+  .container {
+    width: $base-width-mobile;
+    padding-top: $base-padding-mobile;
+  }
+
+  .title {
+    margin-bottom: 40px;
+  }
+}

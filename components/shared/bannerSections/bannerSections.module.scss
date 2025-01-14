@@ -1,0 +1,126 @@
+@import '/styles/variables';
+
+.container {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+}
+
+.description {
+  text-align: center;
+  max-width: 45%;
+}
+
+.link {
+  margin-top: 30px;
+}
+
+.ocapella {
+  padding-bottom: 60px;
+  .container {
+    padding: 120px 0 100px 0;
+    background:
+      image-set(
+        url('/images/texture.webp') type('image/webp'),
+        url('/images/texture.png') type('image/png')
+      ),
+      image-set(
+          url('/images/ocapella_back.webp') type('image/webp'),
+          url('/images/ocapella_back.png') type('image/png')
+        )
+        center / cover no-repeat;
+  }
+}
+
+.aliens {
+  .container {
+    padding: 100px 0;
+    background:
+      image-set(
+        url('/images/texture.webp') type('image/webp'),
+        url('/images/texture.png') type('image/png')
+      ),
+      image-set(
+          url('/images/aliens_back.webp') type('image/webp'),
+          url('/images/aliens_back.png') type('image/png')
+        )
+        center / cover no-repeat;
+  }
+}
+
+@media screen and (max-width: $laptop-query) {
+  .ocapella {
+    padding-bottom: 0px;
+  }
+
+  .link {
+    margin-top: 20px;
+  }
+
+  .container {
+    padding: 65px 0;
+  }
+
+  .aliens {
+    .container {
+      padding-bottom: 50px;
+      padding-top: 50px;
+    }
+  }
+}
+
+@media screen and (max-width: $tablet-query) {
+  .container {
+    padding: 60px 0;
+  }
+
+  .ocapella {
+    .container {
+      padding: 50px 0 50px 0;
+    }
+  }
+
+  .aliens {
+    .container {
+      padding-bottom: 0px;
+    }
+  }
+}
+
+@media screen and (max-width: $mobile-query) {
+  .ocapella {
+    padding-bottom: 0px;
+  }
+
+  .link {
+    margin-top: 10px;
+  }
+
+  .description {
+    width: $base-width-mobile;
+    max-width: $base-width-mobile;
+  }
+
+  .aliens {
+    .container {
+      padding-top: 25px;
+    }
+  }
+}
+
+@media screen and (min-width: 1930px) {
+  .ocapella {
+    .container {
+      padding: 220px 0 200px 0;
+    }
+  }
+
+  .aliens {
+    .container {
+      padding: 200px 0;
+    }
+  }
+}

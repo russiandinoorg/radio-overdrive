@@ -1,0 +1,28 @@
+@import '/styles/variables';
+
+.link {
+  position: relative;
+  display: inline-block;
+  text-transform: uppercase;
+
+  span {
+    position: relative;
+    z-index: 2;
+  }
+
+  &::before {
+    content: '';
+    position: absolute;
+    bottom: 0px;
+    left: 0;
+    width: 100%;
+    height: 11px;
+    background: #9337d4;
+    transition: $base-transition;
+  }
+  &:hover {
+    &::before {
+      height: 110%;
+    }
+  }
+}

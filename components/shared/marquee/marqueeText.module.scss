@@ -1,0 +1,47 @@
+@import '/styles/variables';
+
+.content {
+  -webkit-text-stroke: 1.5px $base-color;
+  text-stroke: 1.5px $base-color;
+  font-family: var(--micraDi), sans-serif;
+  font-size: 80px;
+  font-weight: 400;
+  color: rgb(0, 0, 0, 0);
+}
+
+.ellipse {
+  width: 20px;
+  margin: 0 44px;
+}
+
+@media screen and (max-width: $laptop-query) {
+  .content {
+    font-size: 54px;
+  }
+  .ellipse {
+    width: 16px;
+    margin: 0 30px;
+  }
+}
+
+@media screen and (max-width: $tablet-query) {
+  .content {
+    font-size: 40px;
+  }
+
+  .ellipse {
+    width: 12px;
+    margin: 0 22px;
+  }
+}
+
+@media screen and (max-width: $mobile-query) {
+  .content {
+    font-size: 30px;
+  }
+
+  .ellipse {
+    width: 10px;
+    margin: 0 11px;
+  }
+}
