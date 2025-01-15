@@ -47,6 +47,7 @@
     "rxjs": "7.8.1",
     "sanity": "3.64.1",
     "sanity-plugin-asset-source-unsplash": "3.0.1",
+    "sanity-plugin-vercel-deploy": "^3.3.4",
     "sass": "^1.83.0",
     "server-only": "0.0.1",
     "styled-components": "6.1.13",
