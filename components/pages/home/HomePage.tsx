@@ -13,6 +13,7 @@ import {
   CentredSections,
   Presenters,
   Radio,
+  VideoAbout,
 } from '@/components';
 import { IconArrowNextLong, IconButtonPlayText } from '@/components/icons';
 import { AnimationTextWrapper, LinkSubscribeWrapper } from '@/components/wrappers';
@@ -79,6 +80,7 @@ export const HomePage = ({ data }: HomePageProps) => {
             <MarqueeText>мы вещаем до последнего</MarqueeText>
           </div>
         </section>
+        <VideoAbout />
         <section className={styles.about} id='about'>
           <div className={styles.container}>
             <div className={classnames(styles.img_wrapper, 'dynamic-img')}>
