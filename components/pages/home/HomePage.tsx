@@ -80,7 +80,6 @@ export const HomePage = ({ data }: HomePageProps) => {
             <MarqueeText>мы вещаем до последнего</MarqueeText>
           </div>
         </section>
-        <VideoAbout />
         <section className={styles.about} id='about'>
           <div className={styles.container}>
             <div className={classnames(styles.img_wrapper, 'dynamic-img')}>
@@ -131,6 +130,7 @@ export const HomePage = ({ data }: HomePageProps) => {
             </div>
           </div>
         </section>
+        <VideoAbout />
         <CentredSections.Team className={styles.presenters} id='presenters'>
           {/* Showcase presenters */}
           {showcasePresenters && showcasePresenters.length > 0 && (
