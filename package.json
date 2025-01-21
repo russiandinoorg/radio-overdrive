@@ -1,5 +1,5 @@
 {
-  "name": "sanity-template-template-nextjs-personal-website",
+  "name": "radio-overdrive",
   "private": true,
   "scripts": {
     "build": "next build",

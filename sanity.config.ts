@@ -16,7 +16,7 @@ import schedule from '@/sanity/schemas/documents/schedule';
 import home from '@/sanity/schemas/singletons/home';
 
 const title =
-  process.env.NEXT_PUBLIC_SANITY_PROJECT_TITLE || 'Next.js Personal Website with Sanity.io';
+  process.env.NEXT_PUBLIC_SANITY_PROJECT_TITLE || 'Радио Овердрайв';
 
 export default defineConfig({
   basePath: studioUrl,
