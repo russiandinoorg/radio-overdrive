@@ -146,6 +146,12 @@
   }
 }
 
+.modalContent{
+  display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
 @media screen and (max-width: $laptop-query) {
   .subcontainer_first {
     gap: 30px;

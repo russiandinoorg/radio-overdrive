@@ -1,6 +1,6 @@
 import type { FC } from 'react';
 
-import { Typography } from '@/components';
+import { Typography, ButtonText } from '@/components';
 import {
   IconLogoInstagram,
   IconLogoMail,
@@ -78,6 +78,15 @@ export const Footer: FC<FooterProps> = ({ id }) => (
           <Typography tag='p' variant='text'>
             © {currentYear} Радио Овердрайв. Санкт-Петербург. Все права защищены.
           </Typography>
+          <ButtonText>
+          <ul className={styles.modalContent}>
+          <Typography tag='p' variant='text'>Дизайнеры — Мария Давыдова, Артём Артамонов</Typography>
+          <Typography tag='p' variant='text'>Веб-разработчик — Анна Черкасова</Typography>
+          <Typography tag='p' variant='text'>Редактор — Микерина Анастасия</Typography>
+          <Typography tag='p' variant='text'>Видео — Анастасия Мальцева, Маргарита Царёва, Артëм Артамонов, Алексей Бочкарëв</Typography>
+          <Typography tag='p' variant='text'>Руководители проекта — Вершкова Диана, Видяскина Катерина</Typography>
+                </ul>
+          </ButtonText>
         </div>
         <div className={styles.rd_wrapper}>
           <a
