@@ -2,7 +2,7 @@ import { defineArrayMember, defineField, defineType } from 'sanity';
 
 export default defineType({
   name: 'presenter',
-  title: 'Presenter',
+  title: 'Ведущие',
   type: 'document',
   fields: [
     defineField({
@@ -21,7 +21,7 @@ export default defineType({
     }),
     defineField({
       name: 'city',
-      description: 'Указывается в обозначением населенного пункта п. г. Лондон',
+      description: 'Указывается с бозначением населенного пункта п. г. Лондон',
       title: 'Город ведущего',
       type: 'string',
       validation: (rule) => rule.required(),
@@ -29,7 +29,7 @@ export default defineType({
     defineField({
       name: 'coverImage',
       title: 'Фотография ведущего',
-      description: 'Не очень тяжелая и с соблюдением пропорций',
+      description: 'В идеале 1690x1080',
       type: 'image',
       options: {
         hotspot: true,
@@ -39,6 +39,7 @@ export default defineType({
     defineField({
       name: 'bio',
       title: 'Биография ведущего',
+      description: 'В идеале до 140 символов (возможны исключения)',
       type: 'array',
       of: [
         defineArrayMember({
@@ -86,7 +87,7 @@ export default defineType({
               name: 'alt',
               type: 'string',
               title: 'Alt text',
-              description: 'Alternative text for screenreaders. Falls back on caption if not set',
+              description: 'Alternative text for the image',
             }),
           ],
         }),
