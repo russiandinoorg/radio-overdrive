@@ -24,7 +24,7 @@ export const PresenterListItem = ({ presenter }: { presenter: ShowcasePresenter 
         {presenter.name}
       </Typography>
       <Typography tag='p' variant='text4'>
-        г. {presenter.city}
+        {presenter.city}
       </Typography>
       <Typography className={styles.card_description} tag='div' variant='text'>
         <CustomPortableText value={presenter.bio as PortableTextBlock[]} />
