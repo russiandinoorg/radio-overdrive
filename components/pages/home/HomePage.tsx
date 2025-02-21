@@ -17,9 +17,9 @@ import {
 } from '@/components';
 import { IconArrowNextLong, IconButtonPlayText } from '@/components/icons';
 import { AnimationTextWrapper, LinkSubscribeWrapper } from '@/components/wrappers';
-import aboutPicPath1 from '@/public/images/about-pic-path1.png';
-import aboutPicPath2 from '@/public/images/about-pic-path2.png';
-import aboutPicPath3 from '@/public/images/about-pic-path3.png';
+import aboutPicPath1 from '@/public/images/about-pic-path1-new.png';
+import aboutPicPath2 from '@/public/images/about-pic-path2-new.png';
+import aboutPicPath3 from '@/public/images/about-pic-path3-new.png';
 import type { HomePagePayload } from '@/types/types';
 
 import styles from './page.module.scss';
