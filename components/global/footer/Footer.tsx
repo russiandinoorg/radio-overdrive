@@ -80,7 +80,7 @@ export const Footer: FC<FooterProps> = ({ id }) => (
           </Typography>
           <ButtonText>
             <ul className={styles.modalContent}>
-              <Typography tag='p' variant='text'>Дизайнеры — Мария Давыдова, Артём Артамонов</Typography>
+              <Typography tag='p' variant='text'>Дизайнеры — Мария Давыдова, Артём Артамонов, Юля Микуша, Ольга Осипова, Крис Максимова</Typography>
               <Typography tag='p' variant='text'>Веб-разработчик — Анна Черкасова, Анастасия Храмова</Typography>
               <Typography tag='p' variant='text'>Редактор — Анастасия Микерина</Typography>
               <Typography tag='p' variant='text'>Видео — Анастасия Мальцева, Маргарита Царёва, Артëм Артамонов, Алексей Бочкарëв</Typography>
