@@ -79,13 +79,23 @@ export const Footer: FC<FooterProps> = ({ id }) => (
             © {currentYear} Радио Овердрайв. Санкт-Петербург. Все права защищены.
           </Typography>
           <ButtonText>
-          <ul className={styles.modalContent}>
-          <Typography tag='p' variant='text'>Дизайнеры — Мария Давыдова, Артём Артамонов</Typography>
-          <Typography tag='p' variant='text'>Веб-разработчик — Анна Черкасова</Typography>
-          <Typography tag='p' variant='text'>Редактор — Микерина Анастасия</Typography>
-          <Typography tag='p' variant='text'>Видео — Анастасия Мальцева, Маргарита Царёва, Артëм Артамонов, Алексей Бочкарëв</Typography>
-          <Typography tag='p' variant='text'>Руководители проекта — Вершкова Диана, Видяскина Катерина</Typography>
-                </ul>
+            <ul className={styles.modalContent}>
+              <Typography tag='p' variant='text'>Дизайнеры — Мария Давыдова, Артём Артамонов</Typography>
+              <Typography tag='p' variant='text'>Веб-разработчики — Анна Черкасова, Анастасия Храмова</Typography>
+              <Typography tag='p' variant='text'>Редактор — Анастасия Микерина</Typography>
+              <Typography tag='p' variant='text'>Видео — Анастасия Мальцева, Маргарита Царёва, Артëм Артамонов, Алексей Бочкарëв</Typography>
+              <Typography tag='p' variant='text'>Руководители проекта — Диана Вершкова, Катерина Видяскина</Typography>
+              <Typography tag='p' variant='text'>Продюсирование — 
+                <a
+                  className={styles.net_link}
+                  href='https://russiandino.ru/'
+                  rel='noreferrer'
+                  target='_blank'
+                >
+                  Russkiy Dinozavr
+                </a>
+              </Typography>
+            </ul>
           </ButtonText>
         </div>
         <div className={styles.rd_wrapper}>

@@ -17,9 +17,9 @@ import {
 } from '@/components';
 import { IconArrowNextLong, IconButtonPlayText } from '@/components/icons';
 import { AnimationTextWrapper, LinkSubscribeWrapper } from '@/components/wrappers';
-import aboutPicPath1 from '@/public/images/about-pic-path1.png';
-import aboutPicPath2 from '@/public/images/about-pic-path2.png';
-import aboutPicPath3 from '@/public/images/about-pic-path3.png';
+import aboutPicPath1 from '@/public/images/about-pic-path1-new.png';
+import aboutPicPath2 from '@/public/images/about-pic-path2-new.png';
+import aboutPicPath3 from '@/public/images/about-pic-path3-new.png';
 import type { HomePagePayload } from '@/types/types';
 
 import styles from './page.module.scss';
@@ -96,13 +96,13 @@ export const HomePage = ({ data }: HomePageProps) => {
             <div className={styles.container_text}>
               <div className={styles.title_wrapper}>
                 <Typography className={styles.title} tag='h3' variant='title3'>
-                  МУЗЫКА,
+                ЛЮБОВЬ,
                 </Typography>
                 <Typography className={styles.title} tag='h3' variant='title3'>
                   СВОБОДА,
                 </Typography>
                 <Typography className={styles.title} tag='h3' variant='title3'>
-                  ЛЮБОВЬ
+                ДИКОСТЬ
                 </Typography>
               </div>
               <div className={styles.description_wrapper}>
