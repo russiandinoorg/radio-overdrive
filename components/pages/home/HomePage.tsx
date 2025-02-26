@@ -1,5 +1,8 @@
+"use client";
+
 import classnames from 'classnames';
 import Image from 'next/legacy/image';
+import { useEffect, useRef, useState } from 'react';
 
 import {
   Footer,
@@ -31,6 +34,27 @@ export interface HomePageProps {
 export const HomePage = ({ data }: HomePageProps) => {
   // Default to an empty object to allow previews on non-existent documents
   const { showcasePresenters = [], showcaseSchedule = [], showcaseRadio = [] } = data ?? {};
+  const sectionRef = useRef<HTMLDivElement | null>(null);
+  const [isVisible, setIsVisible] = useState(false);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setIsVisible(true);
+          observer.disconnect();
+        }
+      },
+      { threshold: 0.3 }
+    );
+
+    if (sectionRef.current) {
+      observer.observe(sectionRef.current);
+    }
+
+    return () => observer.disconnect();
+  }, []);
+
   return (
     <AnimationTextWrapper>
       <main className={styles.main}>
@@ -80,9 +104,9 @@ export const HomePage = ({ data }: HomePageProps) => {
             <MarqueeText>мы вещаем до последнего</MarqueeText>
           </div>
         </section>
-        <section className={styles.about} id='about'>
+        <section className={styles.about} id='about' ref={sectionRef}>
           <div className={styles.container}>
-            <div className={classnames(styles.img_wrapper, 'dynamic-img')}>
+            <div className={classnames(styles.img_wrapper, 'dynamic-img', { [styles.visible]: isVisible })}>
               <div className={styles.image_wrapper_one}>
                 <Image alt='' className={styles.img} layout='responsive' src={aboutPicPath1} />
               </div>
