@@ -1,8 +1,5 @@
-"use client";
-
 import classnames from 'classnames';
 import Image from 'next/legacy/image';
-import { useEffect, useRef, useState } from 'react';
 
 import {
   Footer,
@@ -34,27 +31,7 @@ export interface HomePageProps {
 export const HomePage = ({ data }: HomePageProps) => {
   // Default to an empty object to allow previews on non-existent documents
   const { showcasePresenters = [], showcaseSchedule = [], showcaseRadio = [] } = data ?? {};
-  const sectionRef = useRef<HTMLDivElement | null>(null);
-  const [isVisible, setIsVisible] = useState(false);
-
-  useEffect(() => {
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting) {
-          setIsVisible(true);
-          observer.disconnect();
-        }
-      },
-      { threshold: 0.3 }
-    );
-
-    if (sectionRef.current) {
-      observer.observe(sectionRef.current);
-    }
-
-    return () => observer.disconnect();
-  }, []);
-
+  
   return (
     <AnimationTextWrapper>
       <main className={styles.main}>
@@ -104,16 +81,16 @@ export const HomePage = ({ data }: HomePageProps) => {
             <MarqueeText>мы вещаем до последнего</MarqueeText>
           </div>
         </section>
-        <section className={styles.about} id='about' ref={sectionRef}>
+        <section className={styles.about} id='about'>
           <div className={styles.container}>
-            <div className={classnames(styles.img_wrapper, 'dynamic-img', { [styles.visible]: isVisible })}>
-              <div className={styles.image_wrapper_one}>
+            <div className={styles.img_wrapper}>
+              <div className={classnames(styles.image_wrapper_one, 'dynamic-img')}>
                 <Image alt='' className={styles.img} layout='responsive' src={aboutPicPath1} />
               </div>
-              <div className={styles.image_wrapper_two}>
+              <div className={classnames(styles.image_wrapper_two, 'dynamic-img')}>
                 <Image alt='' className={styles.img} layout='responsive' src={aboutPicPath2} />
               </div>
-              <div className={styles.image_wrapper_three}>
+              <div className={classnames(styles.image_wrapper_three, 'dynamic-img')}>
                 <Image alt='' className={styles.img} layout='responsive' src={aboutPicPath3} />
               </div>
             </div>

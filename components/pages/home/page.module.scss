@@ -198,26 +198,11 @@
     align-self: end;
   }
 
-  @keyframes fadeInUp {
-    from {
-      opacity: 0;
-      transform: translateY(300px);
-    }
-
-    to {
-      opacity: 1;
-      transform: translateY(0);
-    }
-  }
-
   .img_wrapper {
     position: relative;
     display: flex;
     align-items: flex-end;
     gap: 30px;
-    opacity: 0;
-    transform: translateY(300px);
-    transition: opacity 0.3s ease-out, transform 0.3s ease-out;
 
     .image_wrapper_one,
     .image_wrapper_two,
@@ -237,25 +222,6 @@
       object-fit: contain;
       object-position: left bottom;
     }
-  }
-
-  // Добавляем класс visible, когда блок в области видимости
-  .img_wrapper.visible {
-    opacity: 1;
-    transform: translateY(0);
-  }
-
-  // Анимация применяется только когда блок появился
-  .image_wrapper_one.animate {
-    animation: fadeInUp 1.0s ease-out 0.6s forwards;
-  }
-
-  .image_wrapper_two.animate {
-    animation: fadeInUp 1.0s ease-out 1.2s forwards;
-  }
-
-  .image_wrapper_three.animate {
-    animation: fadeInUp 1.0s ease-out 0.9s forwards;
   }
 
   .img_laptop {
