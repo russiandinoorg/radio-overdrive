@@ -12,13 +12,25 @@ export const UseDynamicImgAnimation = (ref: ReactRef) =>
   useGSAP(
     () => {
       const imgArray: HTMLElement[] = gsap.utils.toArray('.dynamic-img');
-      imgArray.forEach((dynamic: HTMLElement) => {
-        ScrollTrigger.create({
-          trigger: dynamic,
-          start: '0px center',
-          onEnter: () => dynamic.classList.add('active'),
-        });
-      });
+      
+        gsap.fromTo(
+          imgArray,
+          {
+            opacity: 0,
+            y: 400
+          },
+          {
+            opacity: 1,
+            y: 0,
+            duration: 1,
+            ease: 'easeOut',
+            stagger: 0.4,
+            scrollTrigger: {
+              trigger: '#about',
+              start: 'top 40%',
+              toggleActions: 'play none none none',
+            },
+          });
     },
     { scope: ref },
   );

@@ -31,6 +31,7 @@ export interface HomePageProps {
 export const HomePage = ({ data }: HomePageProps) => {
   // Default to an empty object to allow previews on non-existent documents
   const { showcasePresenters = [], showcaseSchedule = [], showcaseRadio = [] } = data ?? {};
+  
   return (
     <AnimationTextWrapper>
       <main className={styles.main}>
@@ -82,14 +83,14 @@ export const HomePage = ({ data }: HomePageProps) => {
         </section>
         <section className={styles.about} id='about'>
           <div className={styles.container}>
-            <div className={classnames(styles.img_wrapper, 'dynamic-img')}>
-              <div className={styles.image_wrapper_one}>
+            <div className={styles.img_wrapper}>
+              <div className={classnames(styles.image_wrapper_one, 'dynamic-img')}>
                 <Image alt='' className={styles.img} layout='responsive' src={aboutPicPath1} />
               </div>
-              <div className={styles.image_wrapper_two}>
+              <div className={classnames(styles.image_wrapper_two, 'dynamic-img')}>
                 <Image alt='' className={styles.img} layout='responsive' src={aboutPicPath2} />
               </div>
-              <div className={styles.image_wrapper_three}>
+              <div className={classnames(styles.image_wrapper_three, 'dynamic-img')}>
                 <Image alt='' className={styles.img} layout='responsive' src={aboutPicPath3} />
               </div>
             </div>
