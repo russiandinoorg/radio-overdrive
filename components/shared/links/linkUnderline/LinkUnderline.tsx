@@ -5,7 +5,7 @@ import styles from './linkUnderline.module.scss';
 import type { LinkUnderlineProps } from './types';
 
 export const LinkUnderline: FC<LinkUnderlineProps> = ({ className, children }) => (
-  <span className={classnames(className, styles.link)}>
+  <a className={classnames(className, styles.link)}>
     <span>{children}</span>
-  </span>
+  </a>
 );

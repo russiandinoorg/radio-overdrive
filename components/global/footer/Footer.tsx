@@ -55,13 +55,13 @@ export const Footer: FC<FooterProps> = ({ id }) => (
       <div className={styles.subcontainer_second}>
         <a
           className={styles.mail_link}
-          href='mailto:radio@russiandino.ru'
+          href='mailto:go@radio-overdrive.space'
           rel='noreferrer'
           target='_blank'
         >
           <IconLogoMail className={styles.net_logo} />
           <Typography tag='p' variant='text'>
-            radio@russiandino.ru
+          go@radio-overdrive.space
           </Typography>
         </a>
 
