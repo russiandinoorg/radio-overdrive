@@ -7,6 +7,7 @@ import {
   IconLogoRD,
   IconLogoTelegram,
   IconLogoVk,
+  IconLogoRutube
 } from '@/components/icons';
 
 import styles from './footer.module.scss';
@@ -35,7 +36,7 @@ export const Footer: FC<FooterProps> = ({ id }) => (
           <a
             aria-label='Овердрайв вконтакте'
             className={styles.net_link}
-            href='https://vk.com/rocknword'
+            href='https://vk.com/radiooverdrive'
             rel='noreferrer'
             target='_blank'
           >
@@ -49,6 +50,15 @@ export const Footer: FC<FooterProps> = ({ id }) => (
             target='_blank'
           >
             <IconLogoInstagram className={styles.net_logo} />
+          </a>
+          <a
+            aria-label='Овердрайв на Rutube'
+            className={styles.net_link}
+            href='https://rutube.ru/channel/54791427/'
+            rel='noreferrer'
+            target='_blank'
+          >
+            <IconLogoRutube className={styles.net_logo} />
           </a>
         </div>
       </div>
@@ -83,7 +93,7 @@ export const Footer: FC<FooterProps> = ({ id }) => (
               <Typography tag='p' variant='text'>Дизайнеры — Мария Давыдова, Артём Артамонов</Typography>
               <Typography tag='p' variant='text'>Веб-разработчики — Анна Черкасова, Анастасия Храмова</Typography>
               <Typography tag='p' variant='text'>Редактор — Анастасия Микерина</Typography>
-              <Typography tag='p' variant='text'>Видео — Анастасия Мальцева, Маргарита Царёва, Артëм Артамонов, Алексей Бочкарëв</Typography>
+              <Typography tag='p' variant='text'>Видео — Анастасия Мальцева, Маргарита Царева, Артëм Артамонов, Алексей Бочкарëв</Typography>
               <Typography tag='p' variant='text'>Руководители проекта — Диана Вершкова, Катерина Видяскина</Typography>
               <Typography tag='p' variant='text'>Продюсирование — 
                 <a

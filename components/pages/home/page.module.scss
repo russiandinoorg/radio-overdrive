@@ -430,11 +430,9 @@
 @media screen and (max-width: 550px) {
   .planet {
     background:
-      image-set(url('/images/texture.webp') type('image/webp'),
-        url('/images/texture.png') type('image/png')),
+      image-set(url('/images/texture.webp') type('image/webp')),
       linear-gradient(180deg, #000 0%, rgba(0, 0, 0, 0) 20%),
-      image-set(url('/images/over-planet-mobile-new.webp') type('image/webp'),
-        url('/images/over-planet-mobile-new.png') type('image/png')) center bottom / cover no-repeat;
+      image-set(url('/images/over-planet-mobile-new.webp') type('image/webp')) center bottom / cover no-repeat;
 
     .container {
       gap: 80px;

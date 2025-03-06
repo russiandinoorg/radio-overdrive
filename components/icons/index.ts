@@ -15,3 +15,4 @@ export * from './IconLogoApplePodcast';
 export * from './IconLogoZvuk';
 export * from './IconLogoCastbox';
 export * from './IconLogoOvercast';
+export * from './IconLogoRutube';
