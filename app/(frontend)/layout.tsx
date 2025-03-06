@@ -1,3 +1,4 @@
+import Head from 'next/head';
 import type { Viewport } from 'next';
 import dynamic from 'next/dynamic';
 import { draftMode } from 'next/headers';
@@ -24,7 +25,9 @@ export const viewport: Viewport = {
 
 const IndexRoute = ({ children }: { children: React.ReactNode }) => (
   <>
-  <YandexMetrika />
+    <Head>
+      <YandexMetrika />
+    </Head>
     <div>
       <div>
         <Header />
