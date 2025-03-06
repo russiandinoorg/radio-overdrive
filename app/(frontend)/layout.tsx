@@ -4,6 +4,7 @@ import { draftMode } from 'next/headers';
 import { Suspense } from 'react';
 
 import { Header } from '@/components/global';
+import { YandexMetrika } from '@/components/YandexMetrika';
 
 const LiveVisualEditing = dynamic(() => import('@/sanity/loader/LiveVisualEditing'));
 
@@ -23,6 +24,7 @@ export const viewport: Viewport = {
 
 const IndexRoute = ({ children }: { children: React.ReactNode }) => (
   <>
+  <YandexMetrika />
     <div>
       <div>
         <Header />
