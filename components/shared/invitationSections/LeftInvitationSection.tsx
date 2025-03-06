@@ -15,9 +15,9 @@ export const LeftInvitationSection = () => (
           <span className='text-highlight'>или просто так</span>:
         </Typography>
         <p>
-          <a href='mailto:radio@russiandino.ru' rel='noreferrer' target='_blank'>
+          <a href='mailto:go@radio-overdrive.space' rel='noreferrer' target='_blank'>
             <Typography className={styles.mailLink} tag='span' variant='text9'>
-              radio@russiandino.ru
+            go@radio-overdrive.space
             </Typography>
           </a>
         </p>
