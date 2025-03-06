@@ -1,7 +1,8 @@
 import type { ComponentPropsWithRef, FC } from 'react';
 
 export const IconLogoRutube: FC<ComponentPropsWithRef<'svg'>> = (props) => (
-  <svg width="58" height="58" viewBox="0 0 58 58" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <svg width="58" height="58" viewBox="0 0 58 58" fill="none" xmlns="http://www.w3.org/2000/svg"
+  {...props}>
     <rect x="0.25" y="0.25" width="57.5" height="57.5" rx="28.75" fill="url(#paint0_linear_2250_117)" />
     <rect x="0.25" y="0.25" width="57.5" height="57.5" rx="28.75" stroke="url(#paint1_linear_2250_117)" stroke-width="0.5" />
     <circle opacity="0.7" cx="29" cy="29" r="28.75" stroke="url(#paint2_linear_2250_117)" stroke-width="0.5" />

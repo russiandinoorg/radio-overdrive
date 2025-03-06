@@ -9,7 +9,7 @@
 
 .subcontainer_first {
   display: grid;
-  justify-content: center;
+  justify-items: center;
   gap: 50px;
   margin-bottom: 35px;
 }
@@ -45,7 +45,7 @@
   align-items: center;
   gap: 14px;
   align-self: center;
-  padding: 10px;
+  // padding: 10px;
 
   p {
     @include text-link();
@@ -71,14 +71,19 @@
   justify-content: center;
 }
 
-.net_link {
-  @include svg-link(box-shadow, 0px 0px 0px 0px rgba(188, 113, 241, 0.5));
-  border-radius: 50%;
-  background-image: $accent-gradient-color;
-  &:hover {
-    @include svg-link-hover(box-shadow, 0px 0px 10px 5px rgba(188, 113, 241, 0.5));
-  }
-}
+// .net_link {
+//   width: 58px;
+//   height: 58px;
+//   display: flex;
+//   justify-content: center;
+//   align-items: center;
+//   @include svg-link(box-shadow, 0px 0px 0px 0px rgba(188, 113, 241, 0.5));
+//   border-radius: 50%;
+//   background-image: $accent-gradient-color;
+//   &:hover {
+//     @include svg-link-hover(box-shadow, 0px 0px 10px 5px rgba(188, 113, 241, 0.5));
+//   }
+// }
 
 .net_logo {
   display: flex;
@@ -167,6 +172,11 @@
     margin: 25px 0 30px 0;
   }
 
+  // .net_link {
+  //   width: 50px;
+  //   height: 50px;
+  // }
+
   .net_logo {
     width: 50px;
     height: 50px;
@@ -185,8 +195,8 @@
   }
 
   .net_logo {
-    width: 45px;
-    height: 45px;
+    width: 46px;
+    height: 46px;
   }
 
   .mail_link {
