@@ -57,7 +57,7 @@ export const HomePage = ({ data }: HomePageProps) => {
                   <IconButtonPlayText className={classnames(styles.playTgLink, 'playTgLink')} />
                 </a>
               </div>
-              <a href='https://t.me/rocknword/12578' rel='noreferrer' target='_blank'>
+              <a href='https://t.me/rocknword/15812' rel='noreferrer' target='_blank'>
                 <div>
                   <div className={styles.donation_wrapper}>
                     <Typography className={styles.donation} tag='p' variant='text5'>
