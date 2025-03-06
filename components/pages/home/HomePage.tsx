@@ -31,7 +31,7 @@ export interface HomePageProps {
 export const HomePage = ({ data }: HomePageProps) => {
   // Default to an empty object to allow previews on non-existent documents
   const { showcasePresenters = [], showcaseSchedule = [], showcaseRadio = [] } = data ?? {};
-  
+
   return (
     <AnimationTextWrapper>
       <main className={styles.main}>
@@ -57,7 +57,7 @@ export const HomePage = ({ data }: HomePageProps) => {
                   <IconButtonPlayText className={classnames(styles.playTgLink, 'playTgLink')} />
                 </a>
               </div>
-              <a href='https://t.me/rocknword/12578' rel='noreferrer' target='_blank'>
+              <a href='https://t.me/rocknword/15669' rel='noreferrer' target='_blank'>
                 <div>
                   <div className={styles.donation_wrapper}>
                     <Typography className={styles.donation} tag='p' variant='text5'>
@@ -97,13 +97,13 @@ export const HomePage = ({ data }: HomePageProps) => {
             <div className={styles.container_text}>
               <div className={styles.title_wrapper}>
                 <Typography className={styles.title} tag='h3' variant='title3'>
-                ЛЮБОВЬ,
+                  ЛЮБОВЬ,
                 </Typography>
                 <Typography className={styles.title} tag='h3' variant='title3'>
                   СВОБОДА,
                 </Typography>
                 <Typography className={styles.title} tag='h3' variant='title3'>
-                ДИКОСТЬ
+                  ДИКОСТЬ
                 </Typography>
               </div>
               <div className={styles.description_wrapper}>
@@ -116,13 +116,12 @@ export const HomePage = ({ data }: HomePageProps) => {
                 </Typography>
                 <Typography className={styles.description} tag='p' variant='text'>
                   Радио Овердрайв основано 15 октября 2020 года редакторами независимого
-                  издательства Чтиво на месте бывшей авторской страницы рок-писателя Сергея Иннера,
+                  издательства Чтиво на месте бывшей авторской страницы рок&#8209;писателя Сергея Иннера,
                   психоделически исчезнувшего после презентации его антиромана{' '}
                   <a
-                    href='https://chtivo.spb.ru/book-overdrive.html'
+                    href="https://chtivo.spb.ru/book-overdrive.html"
                     rel='noreferrer'
-                    target='_blank'
-                  >
+                    target='_blank'>
                     <LinkUnderline>«Овердрайв»</LinkUnderline>
                   </a>
                   .
