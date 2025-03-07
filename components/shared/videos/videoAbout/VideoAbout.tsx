@@ -9,7 +9,7 @@ export const VideoAbout = () => {
         poster="/images/screenserver_about.png"
         src="/videos/aboutVideo.mp4"
         loop
-        muted
+        // muted
         controls
       />
     </div>
