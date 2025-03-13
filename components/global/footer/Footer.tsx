@@ -11,6 +11,7 @@ import {
 } from '@/components/icons';
 
 import styles from './footer.module.scss';
+import { LinkUnderline } from '@/components';
 import type { FooterProps } from './types';
 
 const currentYear = new Date().getFullYear();
@@ -102,7 +103,7 @@ export const Footer: FC<FooterProps> = ({ id }) => (
                   rel='noreferrer'
                   target='_blank'
                 >
-                  Russkiy Dinozavr
+                <LinkUnderline>Russkiy Dinozavr</LinkUnderline> 
                 </a>
               </Typography>
             </ul>

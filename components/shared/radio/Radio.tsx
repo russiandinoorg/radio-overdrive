@@ -2,7 +2,7 @@
 
 import { getFile } from '@sanity/asset-utils';
 import classnames from 'classnames';
-import { useRef, useState } from 'react';
+import { useRef, useState, useEffect } from 'react';
 import Typograf from 'typograf';
 
 import { Typography, Player } from '@/components';
@@ -11,6 +11,7 @@ import { client } from '@/sanity/lib/client';
 import type { ShowcaseRadio } from '@/types/types';
 
 import styles from './radio.module.scss';
+import { LinkUnderline } from '@/components';
 import type { AudioFile } from './types';
 
 const tp = new Typograf({ locale: ['ru', 'en-US'] });
@@ -20,36 +21,49 @@ export const Radio = ({ radioItems }: { radioItems: ShowcaseRadio[] }) => {
   const [currentSong, setCurrentSong] = useState<ShowcaseRadio>(radioItems[0]);
   const [tracklist, settracklist] = useState(false);
   const [isPlaying, setIsPlaying] = useState<boolean>(false);
+  const [showRadioList, setShowRadioList] = useState(false);
   const audioRef = useRef<HTMLMediaElement | null>(null);
 
-  const setAudioRef = (currentSongValue: ShowcaseRadio) => {
+  useEffect(() => {
+    const savedSong = localStorage.getItem('currentSong');
+    if (savedSong) {
+      const parsedSong = JSON.parse(savedSong);
+      const foundSong = radioItems.find((song) => song.title === parsedSong.title);
+      if (foundSong) {
+        setCurrentSong(foundSong);
+      }
+    } else {
+      setCurrentSong(radioItems[0]);
+    }
+  }, [radioItems]);
+
+  useEffect(() => {
+    if (currentSong) {
+      localStorage.setItem('currentSong', JSON.stringify(currentSong));
+    }
+  }, [currentSong]);
+
+  const setAudioRef = (song: ShowcaseRadio) => {
     // @ts-expect-error 3 lib
     const audioFile: AudioFile =
       // @ts-expect-error 3 lib
-      currentSongValue.audio && projectId && getFile(currentSongValue.audio.asset, client.config());
+      song.audio && projectId && getFile(song.audio.asset, client.config());
     const audioUrl = audioFile.asset.url;
     return audioUrl;
   };
 
   const songEndHandler = () => {
     const currentIndex = songs.findIndex((song) => song.title === currentSong.title);
-    setCurrentSong(songs[(currentIndex + 1) % songs.length]);
-    setAudioRef(songs[(currentIndex + 1) % songs.length]);
-    try {
-      if (isPlaying && audioRef.current) {
-        audioRef.current.onloadedmetadata = () => {
-          audioRef.current?.play().catch((err) => {
-            console.error(err);
-          });
-        };
-      }
-    } catch (err) {
-      console.error(err);
-    }
+    const nextSong = songs[(currentIndex + 1) % songs.length];
+    setCurrentSong(nextSong);
   };
 
   const tracklistHandler = () => {
     settracklist((prevTracklist) => !prevTracklist);
+  };
+
+  const toggleRadioList = () => {
+    setShowRadioList((prev) => !prev);
   };
 
   return (
@@ -66,25 +80,34 @@ export const Radio = ({ radioItems }: { radioItems: ShowcaseRadio[] }) => {
                 setSongs={setSongs}
                 songs={songs}
               />
-              <audio ref={audioRef} src={setAudioRef(currentSong)} onEnded={songEndHandler}>
+              <audio ref={audioRef} src={currentSong ? setAudioRef(currentSong) : ''} onEnded={songEndHandler}>
                 <track kind='captions' />
-                <source src={setAudioRef(currentSong)} type='audio/mp3' />
+                {currentSong && <source src={setAudioRef(currentSong)} type='audio/mp3' />}
               </audio>
             </div>
-            <Typography className={styles.live} tag='p' variant='text5'>
-              в эфире:
-            </Typography>
+            <div onClick={toggleRadioList}>
+
+              <LinkUnderline>
+                <Typography className={styles.live} tag='p' variant='text5' >
+                  в эфире:
+                </Typography>
+              </LinkUnderline>
+            </div>
             <div className={styles.currentTrackWrapper}>
               <Typography className={styles.title} tag='p' variant='text3'>
                 {currentSong && currentSong.title}
               </Typography>
               <div className={styles.artist}>
-                <Typography className={styles.artistText} tag='p' variant='text'>
-                  {currentSong && tp.execute(currentSong.presenter)}
-                </Typography>
-                <Typography className={styles.artistText} tag='p' variant='text'>
-                  {currentSong && tp.execute(currentSong.date)}
-                </Typography>
+                {currentSong && (
+                  <>
+                    <Typography className={styles.artistText} tag='p' variant='text'>
+                      {tp.execute(currentSong.presenter)}
+                    </Typography>
+                    <Typography className={styles.artistText} tag='p' variant='text'>
+                      {tp.execute(currentSong.date)}
+                    </Typography>
+                  </>
+                )}
               </div>
             </div>
           </div>
@@ -114,13 +137,34 @@ export const Radio = ({ radioItems }: { radioItems: ShowcaseRadio[] }) => {
       <div
         className={tracklist ? classnames(styles.trackWrapper, styles.open) : styles.trackWrapper}
       >
-        {currentSong &&
-          currentSong.tracklist &&
-          currentSong.tracklist.map((track, i) => (
-            <Typography key={i} className={styles.track} tag='p' variant='text4'>
-              {track}
-            </Typography>
-          ))}
+        {currentSong?.tracklist?.map((track, i) => (
+          <Typography key={i} className={styles.track} tag='p' variant='text4'>
+            {track}
+          </Typography>
+        ))}
+        {
+  showRadioList && (
+    <div>
+      {songs.map((song) => (
+        <div
+          key={song.title}
+          className={classnames(styles.radioItem, {
+            [styles.active]: song.title === currentSong?.title,
+          })}
+
+          onClick={() => {
+            setCurrentSong(song);
+            setShowRadioList(false);
+          }}
+        >
+          <Typography tag='p' variant='text4'>
+            {song.title}
+          </Typography>
+        </div>
+      ))}
+    </div>
+  )
+}
       </div>
     </section>
   );
