@@ -40,3 +40,7 @@ export interface SongProps {
   currentSong: ISong;
   overSign: boolean;
 }
+
+export interface VolumeProps {
+  audioRef: RefObject<HTMLMediaElement | null>;
+}

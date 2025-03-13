@@ -1,12 +1,11 @@
 'use client';
 
-import type { FC } from 'react';
-
+import { FC } from 'react';
 import { Typography } from '@/components';
 import { IconButtonPlay, IconButtonStop } from '@/components/icons';
-
 import styles from './player.module.scss';
 import type { PlayerSongProps } from './types';
+import { Volume } from './Volume';
 
 export const PlayerSong: FC<PlayerSongProps> = ({
   isPlaying,
@@ -15,6 +14,7 @@ export const PlayerSong: FC<PlayerSongProps> = ({
   setSongInfo,
   songInfo,
 }) => {
+ 
   const dragHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (audioRef.current) audioRef.current.currentTime = parseInt(e.target.value, 10);
     if (setSongInfo && songInfo)
@@ -70,6 +70,7 @@ export const PlayerSong: FC<PlayerSongProps> = ({
           </Typography>
         </div>
       )}
+      <Volume  audioRef={audioRef}/>
     </div>
   );
 };
