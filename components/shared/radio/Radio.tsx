@@ -31,10 +31,15 @@ export const Radio = ({ radioItems }: { radioItems: ShowcaseRadio[] }) => {
     return audioUrl;
   };
 
+  const audioUrl = currentSong ? setAudioRef(currentSong) : '';
+
+
   const songEndHandler = () => {
     const currentIndex = songs.findIndex((song) => song.title === currentSong.title);
-    setCurrentSong(songs[(currentIndex + 1) % songs.length]);
-    setAudioRef(songs[(currentIndex + 1) % songs.length]);
+
+    const nextSong = (songs[(currentIndex + 1) % songs.length]);
+    setCurrentSong(nextSong);
+    
     try {
       if (isPlaying && audioRef.current) {
         audioRef.current.onloadedmetadata = () => {
@@ -66,9 +71,9 @@ export const Radio = ({ radioItems }: { radioItems: ShowcaseRadio[] }) => {
                 setSongs={setSongs}
                 songs={songs}
               />
-              <audio ref={audioRef} src={setAudioRef(currentSong)} onEnded={songEndHandler}>
+              <audio ref={audioRef} src={audioUrl} onEnded={songEndHandler}>
                 <track kind='captions' />
-                <source src={setAudioRef(currentSong)} type='audio/mp3' />
+                <source src={audioUrl} type='audio/mp3' />
               </audio>
             </div>
             <Typography className={styles.live} tag='p' variant='text5'>

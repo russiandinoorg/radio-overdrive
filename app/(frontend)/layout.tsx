@@ -8,12 +8,18 @@ import { Header } from '@/components/global';
 const LiveVisualEditing = dynamic(() => import('@/sanity/loader/LiveVisualEditing'));
 
 export const generateMetadata = () => ({
-  title: 'радио Овердрайв',
+  title: 'Радио Овердрайв',
   description:
     'Семь ведущих из разных городов Земли ставят музыку высокого стиля прямо с космической станции. И помни — мы вещаем до последнего.',
   keywords: ['интернет-радио', 'новая музыка', 'топовые треки', 'рок', 'инди-музыка', 'андеграунд'],
   openGraph: {
+    title: '«Радио Овердрайв» — Музыка без границ',
+    description:
+      'Откройте для себя уникальные музыкальные стили и послушайте лучшие треки с «Радио Овердрайв», вещающего прямо из космоса.',
     images: '/images/og-overdrive.png',
+    site_name: 'Радио Овердрайв',
+    type: 'website',
+    url: 'https://www.radio-overdrive.space/',
   },
 });
 
