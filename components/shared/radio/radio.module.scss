@@ -30,21 +30,19 @@
 }
 
 .broadcastWrapper {
+  width: 100%;
   display: flex;
+  justify-content: space-between;
   align-items: center;
 }
 
 .live {
-  margin-left: 20px;
   cursor: pointer;
 }
 
 .currentTrackWrapper {
   display: flex;
-}
-
-.title {
-  margin-left: 90px;
+  margin-left: 60px;
 }
 
 .artist {
@@ -346,4 +344,11 @@
     width: 1.5px;
     height: 11px;
   }
+}
+
+// radio-container
+
+.radio__container {
+  display: flex;
+  margin: 20px 0 -30px 10vw;
 }

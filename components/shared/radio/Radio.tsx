@@ -13,6 +13,7 @@ import type { ShowcaseRadio } from '@/types/types';
 import styles from './radio.module.scss';
 import { LinkUnderline } from '@/components';
 import type { AudioFile } from './types';
+import { Volume } from '../player/Volume';
 
 const tp = new Typograf({ locale: ['ru', 'en-US'] });
 
@@ -23,6 +24,11 @@ export const Radio = ({ radioItems }: { radioItems: ShowcaseRadio[] }) => {
   const [isPlaying, setIsPlaying] = useState<boolean>(false);
   const [showRadioList, setShowRadioList] = useState(false);
   const audioRef = useRef<HTMLMediaElement | null>(null);
+  const [songInfo, setSongInfo] = useState({
+    currentTime: 0,
+    duration: 0,
+    animationPercentage: 0,
+  });
 
   useEffect(() => {
     const savedSong = localStorage.getItem('currentSong');
@@ -66,52 +72,75 @@ export const Radio = ({ radioItems }: { radioItems: ShowcaseRadio[] }) => {
     setShowRadioList((prev) => !prev);
   };
 
+  const timeUpdateHandler = (e: React.ChangeEvent<HTMLMediaElement>) => {
+    const current = e.target.currentTime;
+    const { duration } = e.target;
+    const roundedCurrent = Math.round(current);
+    const roundedDuration = Math.round(duration);
+    const animation = Math.round((roundedCurrent / roundedDuration) * 100);
+    setSongInfo({
+      currentTime: current,
+      duration,
+      animationPercentage: animation,
+    });
+  };
+
+
   return (
     <section className={styles.wrapper}>
       <div className={styles.container}>
         <div className={styles.frame}>
           <div className={styles.broadcastWrapper}>
             <div>
-              <Player.PlayerSong
-                audioRef={audioRef}
-                isPlaying={isPlaying}
-                setCurrentSong={setCurrentSong}
-                setIsPlaying={setIsPlaying}
-                setSongs={setSongs}
-                songs={songs}
-              />
-              <audio ref={audioRef} src={currentSong ? setAudioRef(currentSong) : ''} onEnded={songEndHandler}>
+              <div className={styles.radio__container}>
+                <div className={styles.play}>
+                  <LinkUnderline>
+                    <Typography className={styles.live} tag='p' variant='text5' >
+                      в эфире:
+                    </Typography>
+                  </LinkUnderline>
+                </div>
+                <div onClick={toggleRadioList}>
+                  <div className={styles.currentTrackWrapper}>
+                    <Typography className={styles.title} tag='p' variant='text3'>
+                      {currentSong && currentSong.title}
+                    </Typography>
+                    <div className={styles.artist}>
+                      {currentSong && (
+                        <>
+                          <Typography className={styles.artistText} tag='p' variant='text'>
+                            {tp.execute(currentSong.presenter)}
+                          </Typography>
+                          <Typography className={styles.artistText} tag='p' variant='text'>
+                            {tp.execute(currentSong.date)}
+                          </Typography>
+                        </>
+                      )}
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div style={{ width: '70vw' }}>
+                <Player.PlayerSong
+                  audioRef={audioRef}
+                  isPlaying={isPlaying}
+                  setIsPlaying={setIsPlaying}
+                  songInfo={songInfo}
+                  setSongInfo={setSongInfo}
+                />
+              </div>
+              <audio
+                ref={audioRef}
+                src={currentSong ? setAudioRef(currentSong) : ''}
+                // eslint-disable-next-line @typescript-eslint/no-misused-promises, react/jsx-sort-props
+                onEnded={songEndHandler}
+                onLoadedMetadata={timeUpdateHandler}
+                onTimeUpdate={timeUpdateHandler}>
                 <track kind='captions' />
                 {currentSong && <source src={setAudioRef(currentSong)} type='audio/mp3' />}
               </audio>
             </div>
-            <div onClick={toggleRadioList}>
-
-              <LinkUnderline>
-                <Typography className={styles.live} tag='p' variant='text5' >
-                  в эфире:
-                </Typography>
-              </LinkUnderline>
-            </div>
-            <div className={styles.currentTrackWrapper}>
-              <Typography className={styles.title} tag='p' variant='text3'>
-                {currentSong && currentSong.title}
-              </Typography>
-              <div className={styles.artist}>
-                {currentSong && (
-                  <>
-                    <Typography className={styles.artistText} tag='p' variant='text'>
-                      {tp.execute(currentSong.presenter)}
-                    </Typography>
-                    <Typography className={styles.artistText} tag='p' variant='text'>
-                      {tp.execute(currentSong.date)}
-                    </Typography>
-                  </>
-                )}
-              </div>
-            </div>
-          </div>
-          <div>
+            <Volume audioRef={audioRef} />
             <button
               aria-label='открыть / закрыть'
               className={
@@ -143,28 +172,28 @@ export const Radio = ({ radioItems }: { radioItems: ShowcaseRadio[] }) => {
           </Typography>
         ))}
         {
-  showRadioList && (
-    <div>
-      {songs.map((song) => (
-        <div
-          key={song.title}
-          className={classnames(styles.radioItem, {
-            [styles.active]: song.title === currentSong?.title,
-          })}
+          showRadioList && (
+            <div>
+              {songs.map((song) => (
+                <div
+                  key={song.title}
+                  className={classnames(styles.radioItem, {
+                    [styles.active]: song.title === currentSong?.title,
+                  })}
 
-          onClick={() => {
-            setCurrentSong(song);
-            setShowRadioList(false);
-          }}
-        >
-          <Typography tag='p' variant='text4'>
-            {song.title}
-          </Typography>
-        </div>
-      ))}
-    </div>
-  )
-}
+                  onClick={() => {
+                    setCurrentSong(song);
+                    setShowRadioList(false);
+                  }}
+                >
+                  <Typography tag='p' variant='text4'>
+                    {song.title}
+                  </Typography>
+                </div>
+              ))}
+            </div>
+          )
+        }
       </div>
     </section>
   );
