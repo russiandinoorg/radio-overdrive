@@ -34,6 +34,7 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
+  gap: 10px;
 }
 
 .live {
@@ -42,11 +43,14 @@
 
 .currentTrackWrapper {
   display: flex;
-  margin-left: 60px;
+  justify-content: space-between;
+  align-items: center;
+  gap: 20px;
+  margin: 20px 0 -30px 10vw;
 }
 
+
 .artist {
-  margin-left: 77px;
   display: flex;
   align-items: flex-start;
   gap: 7px;
@@ -156,6 +160,7 @@
 .button span:nth-child(3) {
   top: 0px;
 }
+
 .button span:nth-child(5) {
   top: 7.5px;
 }
@@ -164,6 +169,7 @@
 .button span:nth-child(6) {
   top: 8px;
 }
+
 .button span:nth-child(7) {
   top: 15.5px;
 }
@@ -172,6 +178,7 @@
 .button span:nth-child(9) {
   top: 16px;
 }
+
 .button span:nth-child(3) {
   left: 100%;
 }
@@ -236,20 +243,24 @@
   transform: rotate(45deg);
   border-radius: 50px;
 }
+
 .button.close span:nth-child(3) {
   transform: rotate(-45deg);
   border-radius: 50px;
   left: 25%;
 }
+
 .button.close span:nth-child(7) {
   transform: rotate(-45deg);
   border-radius: 50px;
 }
+
 .button.close span:nth-child(9) {
   transform: rotate(45deg);
   border-radius: 50px;
   left: 25%;
 }
+
 .button.close span:nth-child(2) {
   top: 10px;
   left: 30%;
@@ -288,15 +299,15 @@
   }
 
   .live {
-    margin-left: 15px;
+    font-size: 14px;
   }
 
   .title {
-    margin-left: 20px;
+    font-size: 12px;
   }
 
   .artist {
-    margin-left: 60px;
+    font-size: 12px;
   }
 
   .trackWrapper {
@@ -329,11 +340,6 @@
     display: none;
   }
 
-  .artist {
-    margin-left: 20px;
-    flex-direction: column;
-  }
-
   .trackWrapper {
     right: 0;
     padding: 30px 40px 30px 40px;
@@ -344,11 +350,4 @@
     width: 1.5px;
     height: 11px;
   }
-}
-
-// radio-container
-
-.radio__container {
-  display: flex;
-  margin: 20px 0 -30px 10vw;
 }

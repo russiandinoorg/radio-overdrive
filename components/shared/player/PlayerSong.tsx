@@ -35,6 +35,8 @@ export const PlayerSong: FC<PlayerSongProps> = ({
   const trackAnim = {
     transform: `translateX(${songInfo?.animationPercentage}%)`,
   };
+
+  console.log(songInfo)
   return (
     <div className={styles.player}>
       <div className={styles.playControl}>
