@@ -19,6 +19,7 @@ import { fetchEpisodes } from '@/utils';
 import dataNative from '@/utils/data/ocapellaInfo';
 
 import styles from './page.module.scss';
+import { Volume } from '@/components/shared/player/Volume';
 
 export const Ocapella: FC = () => {
   const [songs, setSongs] = useState<ISong[]>(dataNative);
@@ -98,13 +99,16 @@ export const Ocapella: FC = () => {
     <PodcastPageWrapper description='Подкаст о музыке как феномене и чуде' title='о’капелла'>
       <div className={styles.subContainer}>
         <Player.Song overSign currentSong={currentSong} />
-        <Player.PlayerSong
-          audioRef={audioRef}
-          isPlaying={isPlaying}
-          setIsPlaying={setIsPlaying}
-          setSongInfo={setSongInfo}
-          songInfo={songInfo}
-        />
+        <div className={styles.trackContainer}>
+          <Player.PlayerSong
+            audioRef={audioRef}
+            isPlaying={isPlaying}
+            setIsPlaying={setIsPlaying}
+            setSongInfo={setSongInfo}
+            songInfo={songInfo}
+          />
+          <Volume audioRef={audioRef} />
+        </div>
         <div className={styles.nets_wrapper}>
           {' '}
           <a
