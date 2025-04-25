@@ -43,17 +43,17 @@
 
 .currentTrackWrapper {
   display: flex;
-  justify-content: space-between;
   align-items: center;
-  gap: 20px;
+  gap: 70px;
   margin: 20px 0 -30px 10vw;
 }
 
 
 .artist {
-  display: flex;
-  align-items: flex-start;
-  gap: 7px;
+  width: 50vw;
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
 }
 
 .overSign {

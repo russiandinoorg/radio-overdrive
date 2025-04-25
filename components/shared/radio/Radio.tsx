@@ -32,7 +32,7 @@ export const Radio = ({ radioItems }: { radioItems: ShowcaseRadio[] }) => {
   const getAudioUrl = (song: ShowcaseRadio) => {
     // @ts-expect-error sanity
     const audioFile: AudioFile =
-          // @ts-expect-error sanity
+      // @ts-expect-error sanity
       song.audio && projectId && getFile(song.audio.asset, client.config());
     return audioFile.asset.url;
   };
@@ -134,18 +134,21 @@ export const Radio = ({ radioItems }: { radioItems: ShowcaseRadio[] }) => {
                     в эфире:
                   </Typography>
                 </LinkUnderline>
-                <Typography className={styles.title} tag='p' variant='text3'>
-                  {currentSong?.title}
-                </Typography>
+
                 <div className={styles.artist}>
                   {currentSong && (
                     <>
+                      <Typography className={styles.title} tag='p' variant='text3'>
+                        {currentSong?.title}
+                      </Typography>
+                      <div style={{display:'flex', gap: '15px'}}>
                       <Typography className={styles.artistText} tag='p' variant='text'>
                         {tp.execute(currentSong.presenter)}
                       </Typography>
                       <Typography className={styles.artistText} tag='p' variant='text'>
                         {tp.execute(currentSong.date)}
                       </Typography>
+                      </div>
                     </>
                   )}
                 </div>
