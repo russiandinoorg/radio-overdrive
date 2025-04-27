@@ -10,6 +10,12 @@
   background: transparent;
   box-shadow: 2px 2px 50px rgba(0, 0, 0, 0.205);
   overflow: scroll;
+  scrollbar-width: none; 
+  -ms-overflow-style: none; /* IE/Edge */
+
+  &::-webkit-scrollbar {
+    display: none; /* Chrome, Safari */
+  }
 }
 
 .librarySong {
@@ -485,6 +491,6 @@
   }
 
   .range {
-    width: 60px;
+    width: 50px;
   }
 }
