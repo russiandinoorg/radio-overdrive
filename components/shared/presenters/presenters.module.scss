@@ -173,7 +173,8 @@
 }
 
 @media screen and (max-width: $tablet-query) {
-  .cards_container {
+  .cards_container, 
+  .cards_containerBig {
     width: 90vw;
     display: flex;
     justify-content: left;
@@ -184,22 +185,18 @@
     -webkit-overflow-scrolling: touch;
   }
 
-  .cards_container::-webkit-scrollbar {
+  .cards_container::-webkit-scrollbar,
+  .cards_containerBig::-webkit-scrollbar {
 display: none;
-  }
-
-  .cards_containerBig {
-    .box {
-      width: 250px;
-      min-width: 250px;
-    }
   }
 
   .box {
     width: 250px;
     min-width: 250px;
-    height: 500px;
-    min-height: 500px;
+    height: 400px;
+    min-height: 400px;
+    scroll-snap-align: center;
+    flex-shrink: 0;
   }
 
   @media (hover: hover) {
