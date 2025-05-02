@@ -45,7 +45,7 @@
   display: flex;
   align-items: center;
   gap: 70px;
-  margin: 20px 0 -30px 10vw;
+  margin: 6px 0 -30px 10vw;
 }
 
 
@@ -103,6 +103,12 @@
 .trackWrapper.open::before {
   backdrop-filter: blur(7.5px);
   transition: backdrop-filter 0.0001s;
+}
+
+.volumeContainer{
+  display: flex;
+  gap: 10px;
+  align-items: center;
 }
 
 .button {
@@ -314,6 +320,10 @@
     bottom: 70px;
   }
 
+  .artistText {
+    font-size: 12px;
+  }
+
   .artistText::before {
     top: 1px;
     left: 6px;
@@ -350,4 +360,9 @@
     width: 1.5px;
     height: 11px;
   }
+
+  .artistText {
+    font-size: 14px;
+  }
+
 }

@@ -141,13 +141,13 @@ export const Radio = ({ radioItems }: { radioItems: ShowcaseRadio[] }) => {
                       <Typography className={styles.title} tag='p' variant='text3'>
                         {currentSong?.title}
                       </Typography>
-                      <div style={{display:'flex', gap: '15px'}}>
-                      <Typography className={styles.artistText} tag='p' variant='text'>
-                        {tp.execute(currentSong.presenter)}
-                      </Typography>
-                      <Typography className={styles.artistText} tag='p' variant='text'>
-                        {tp.execute(currentSong.date)}
-                      </Typography>
+                      <div style={{ display: 'flex', gap: '15px' }}>
+                        <Typography className={styles.artistText} tag='p' variant='text'>
+                          {tp.execute(currentSong.presenter)}
+                        </Typography>
+                        <Typography className={styles.artistText} tag='p' variant='text'>
+                          {tp.execute(currentSong.date)}
+                        </Typography>
                       </div>
                     </>
                   )}
@@ -176,17 +176,19 @@ export const Radio = ({ radioItems }: { radioItems: ShowcaseRadio[] }) => {
               </audio>
             </div>
 
-            <Volume audioRef={audioRef} />
+            <div className={styles.volumeContainer}>
+              <Volume audioRef={audioRef} />
 
-            <button
-              aria-label='открыть / закрыть'
-              className={tracklist ? classnames(styles.button, styles.close) : classnames(styles.button, styles.open)}
-              onClick={() => settracklist((prev) => !prev)}
-            >
-              {[...Array(9)].map((_, i) => (
-                <span key={i} />
-              ))}
-            </button>
+              <button
+                aria-label='открыть / закрыть'
+                className={tracklist ? classnames(styles.button, styles.close) : classnames(styles.button, styles.open)}
+                onClick={() => settracklist((prev) => !prev)}
+              >
+                {[...Array(9)].map((_, i) => (
+                  <span key={i} />
+                ))}
+              </button>
+            </div>
           </div>
         </div>
       </div>
