@@ -11,7 +11,7 @@ import { PodcastPageWrapper } from '@/components/pages/podcastPageWrapper';
 import type { ISong } from '@/components/pages/podcastPageWrapper/types';
 import { fetchEpisodes } from '@/utils';
 import dataNative from '@/utils/data/aliensInfo';
-
+import { Volume } from '@/components/shared/player/Volume';
 import styles from './page.module.scss';
 
 export const Aliens: FC = () => {
@@ -95,13 +95,16 @@ export const Aliens: FC = () => {
     >
       <div className={styles.subContainer}>
         <Player.Song currentSong={currentSong} overSign={false} />
-        <Player.PlayerSong
-          audioRef={audioRef}
-          isPlaying={isPlaying}
-          setIsPlaying={setIsPlaying}
-          setSongInfo={setSongInfo}
-          songInfo={songInfo}
-        />
+        <div className={styles.trackContainer}>
+          <Player.PlayerSong
+            audioRef={audioRef}
+            isPlaying={isPlaying}
+            setIsPlaying={setIsPlaying}
+            setSongInfo={setSongInfo}
+            songInfo={songInfo}
+          />
+          <Volume audioRef={audioRef} />
+        </div>
       </div>
       <Player.Library
         audioRef={audioRef}
