@@ -32,9 +32,9 @@
 .broadcastWrapper {
   width: 100%;
   display: flex;
-  justify-content: space-between;
+  justify-content: center;
   align-items: center;
-  gap: 10px;
+  gap: 20px;
 }
 
 .live {
@@ -51,9 +51,9 @@
 
 .artist {
   width: 50vw;
-    display: flex;
-    align-items: center;
-    justify-content: space-evenly;
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
 }
 
 .overSign {
@@ -105,7 +105,7 @@
   transition: backdrop-filter 0.0001s;
 }
 
-.volumeContainer{
+.volumeContainer {
   display: flex;
   gap: 10px;
   align-items: center;

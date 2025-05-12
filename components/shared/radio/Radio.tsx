@@ -17,7 +17,6 @@ import { Volume } from '../player/Volume';
 const tp = new Typograf({ locale: ['ru', 'en-US'] });
 
 export const Radio = ({ radioItems }: { radioItems: ShowcaseRadio[] }) => {
-  const [songs] = useState<ShowcaseRadio[]>(radioItems);
   const [currentSong, setCurrentSong] = useState<ShowcaseRadio>(radioItems[0]);
   const [tracklist, settracklist] = useState(false);
   const [isPlaying, setIsPlaying] = useState<boolean>(false);
@@ -37,91 +36,85 @@ export const Radio = ({ radioItems }: { radioItems: ShowcaseRadio[] }) => {
     return audioFile.asset.url;
   };
 
-  // Восстановление состояния из localStorage
-  useEffect(() => {
-    const savedSong = localStorage.getItem('currentSong');
-    const savedPlayback = localStorage.getItem('radioPlayback');
+  // // Восстановление состояния из localStorage
+  // useEffect(() => {
+  //   const savedSong = localStorage.getItem('currentSong');
+  //   const savedPlayback = localStorage.getItem('radioPlayback');
 
-    if (savedSong) {
-      const parsedSong = JSON.parse(savedSong);
-      const foundSong = radioItems.find((song) => song.title === parsedSong.title);
-      if (foundSong) {
-        setCurrentSong(foundSong);
-      }
-    }
+  //   if (savedSong) {
+  //     const parsedSong = JSON.parse(savedSong);
+  //     const foundSong = radioItems.find((song) => song.title === parsedSong.title);
+  //     if (foundSong) {
+  //       setCurrentSong(foundSong);
+  //     }
+  //   }
 
-    if (savedPlayback) {
-      const parsed = JSON.parse(savedPlayback);
-      setSongInfo((prev) => ({
-        ...prev,
-        currentTime: parsed.currentTime || 0,
-      }));
-      setIsPlaying(parsed.isPlaying ?? false);
-    }
-  }, [radioItems]);
+  //   if (savedPlayback) {
+  //     const parsed = JSON.parse(savedPlayback);
+  //     setSongInfo((prev) => ({
+  //       ...prev,
+  //       currentTime: parsed.currentTime || 0,
+  //     }));
+  //     setIsPlaying(parsed.isPlaying ?? false);
+  //   }
+  // }, [radioItems]);
 
-  // Обновление трека и перезагрузка <audio>
-  useEffect(() => {
-    if (!currentSong) return;
+  // // Обновление трека и перезагрузка <audio>
+  // useEffect(() => {
+  //   if (!currentSong) return;
 
-    localStorage.setItem('currentSong', JSON.stringify(currentSong));
+  //   localStorage.setItem('currentSong', JSON.stringify(currentSong));
 
-    if (audioRef.current) {
-      audioRef.current.load();
-    }
-  }, [currentSong]);
+  //   if (audioRef.current) {
+  //     audioRef.current.load();
+  //   }
+  // }, [currentSong]);
 
-  // Автовоспроизведение после загрузки
-  useEffect(() => {
-    if (audioRef.current && isPlaying) {
-      audioRef.current.play().catch((e) => {
-        console.warn('Ошибка воспроизведения:', e);
-      });
-    }
-  }, [isPlaying]);
+  // // Автовоспроизведение после загрузки
+  // useEffect(() => {
+  //   if (audioRef.current && isPlaying) {
+  //     audioRef.current.play().catch((e) => {
+  //       console.warn('Ошибка воспроизведения:', e);
+  //     });
+  //   }
+  // }, [isPlaying]);
 
   const handleLoadedMetadata = () => {
-    const playback = localStorage.getItem('radioPlayback');
-    if (!playback || !audioRef.current || !currentSong) return;
-
-    const { currentTime, title } = JSON.parse(playback);
-
-    if (title === currentSong.title) {
-      audioRef.current.currentTime = currentTime;
+    if (audioRef.current) {
+      const duration = audioRef.current.duration;
+      setSongInfo((prev) => ({ ...prev, duration }));
     }
   };
 
   const timeUpdateHandler = (e: React.ChangeEvent<HTMLMediaElement>) => {
     const current = e.target.currentTime;
     const duration = e.target.duration;
-    const roundedCurrent = Math.round(current);
-    const roundedDuration = Math.round(duration);
-    const animation = Math.round((roundedCurrent / roundedDuration) * 100);
+    // const roundedCurrent = Math.round(current);
+    // const roundedDuration = Math.round(duration);
+    const animationPercentage = (current / duration) * 100;
 
     setSongInfo({
       currentTime: current,
       duration,
-      animationPercentage: animation,
+      animationPercentage,
     });
-
-    if (currentSong) {
-      localStorage.setItem(
-        'radioPlayback',
-        JSON.stringify({
-          title: currentSong.title,
-          currentTime: current,
-          isPlaying,
-        })
-      );
-    }
   };
 
   const songEndHandler = () => {
-    const currentIndex = songs.findIndex((song) => song.title === currentSong.title);
-    const nextSong = songs[(currentIndex + 1) % songs.length];
+    const currentIndex = radioItems.findIndex((song) => song.title === currentSong.title);
+    const nextSong = radioItems[(currentIndex + 1) % radioItems.length];
     setCurrentSong(nextSong);
   };
 
+  useEffect(() => {
+    if (audioRef.current) {
+      audioRef.current.load();
+      if (isPlaying) {
+        audioRef.current.play().catch(console.warn);
+      }
+    }
+  }, [currentSong]);
+  
   return (
     <section className={styles.wrapper}>
       <div className={styles.container}>
@@ -129,11 +122,9 @@ export const Radio = ({ radioItems }: { radioItems: ShowcaseRadio[] }) => {
           <div className={styles.broadcastWrapper}>
             <div>
               <div className={styles.currentTrackWrapper} onClick={() => setShowRadioList(!showRadioList)}>
-                <LinkUnderline>
                   <Typography className={styles.live} tag='p' variant='text5'>
-                    в эфире:
+                    в&nbsp;эфире:
                   </Typography>
-                </LinkUnderline>
 
                 <div className={styles.artist}>
                   {currentSong && (
@@ -202,7 +193,7 @@ export const Radio = ({ radioItems }: { radioItems: ShowcaseRadio[] }) => {
 
         {showRadioList && (
           <div>
-            {songs.map((song) => (
+            {radioItems.map((song) => (
               <div
                 key={song.title}
                 className={classnames(styles.radioItem, {
