@@ -51,6 +51,7 @@
 
 .artist {
   display: flex;
+  gap: 20px;
 }
 
 .overSign {
@@ -280,6 +281,10 @@
   left: 30%;
 }
 
+.textPlay {
+  margin-right: 10%;
+}
+
 @media screen and (max-width: $laptop-query) {
   .frame {
     min-height: 80px;
@@ -362,7 +367,7 @@
     font-size: 14px;
   }
 
-    .textPlay {
+  .textPlay {
     display: none;
   }
 
