@@ -29,12 +29,13 @@
 .splide__arrow {
   position: absolute;
   border: none;
-  background-color: inherit;
+  background-color: transparent;
   cursor: pointer;
 }
 
 .splide__arrow svg {
   @include svg-link(stroke, $base-color);
+  @include svg-link(fill, transparent);
 }
 
 .splide__arrow:hover svg {

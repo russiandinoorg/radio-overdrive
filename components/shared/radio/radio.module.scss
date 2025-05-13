@@ -44,16 +44,13 @@
 .currentTrackWrapper {
   display: flex;
   align-items: center;
-  gap: 70px;
-  margin: 6px 0 -30px 10vw;
+  gap: 15px;
+  margin: 6px 0 -30px 7vw;
 }
 
 
 .artist {
-  width: 50vw;
   display: flex;
-  align-items: center;
-  justify-content: space-evenly;
 }
 
 .overSign {
@@ -341,9 +338,9 @@
   }
 
   .currentTrackWrapper {
-    flex-direction: column-reverse;
     justify-content: center;
-    gap: 8px;
+    gap: 5%;
+    margin-left: 14vw;
   }
 
   .title {
@@ -363,6 +360,10 @@
 
   .artistText {
     font-size: 14px;
+  }
+
+    .textPlay {
+    display: none;
   }
 
 }

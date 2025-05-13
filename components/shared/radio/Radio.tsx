@@ -5,7 +5,7 @@ import classnames from 'classnames';
 import { useRef, useState, useEffect } from 'react';
 import Typograf from 'typograf';
 
-import { Typography, Player, LinkUnderline } from '@/components';
+import { Typography, Player } from '@/components';
 import { projectId } from '@/sanity/lib/api';
 import { client } from '@/sanity/lib/client';
 import type { ShowcaseRadio } from '@/types/types';
@@ -13,6 +13,7 @@ import type { ShowcaseRadio } from '@/types/types';
 import styles from './radio.module.scss';
 import type { AudioFile } from './types';
 import { Volume } from '../player/Volume';
+import { IconArrowNext, IconArrowPrev } from '@/components/icons';
 
 const tp = new Typograf({ locale: ['ru', 'en-US'] });
 
@@ -36,49 +37,6 @@ export const Radio = ({ radioItems }: { radioItems: ShowcaseRadio[] }) => {
     return audioFile.asset.url;
   };
 
-  // // Восстановление состояния из localStorage
-  // useEffect(() => {
-  //   const savedSong = localStorage.getItem('currentSong');
-  //   const savedPlayback = localStorage.getItem('radioPlayback');
-
-  //   if (savedSong) {
-  //     const parsedSong = JSON.parse(savedSong);
-  //     const foundSong = radioItems.find((song) => song.title === parsedSong.title);
-  //     if (foundSong) {
-  //       setCurrentSong(foundSong);
-  //     }
-  //   }
-
-  //   if (savedPlayback) {
-  //     const parsed = JSON.parse(savedPlayback);
-  //     setSongInfo((prev) => ({
-  //       ...prev,
-  //       currentTime: parsed.currentTime || 0,
-  //     }));
-  //     setIsPlaying(parsed.isPlaying ?? false);
-  //   }
-  // }, [radioItems]);
-
-  // // Обновление трека и перезагрузка <audio>
-  // useEffect(() => {
-  //   if (!currentSong) return;
-
-  //   localStorage.setItem('currentSong', JSON.stringify(currentSong));
-
-  //   if (audioRef.current) {
-  //     audioRef.current.load();
-  //   }
-  // }, [currentSong]);
-
-  // // Автовоспроизведение после загрузки
-  // useEffect(() => {
-  //   if (audioRef.current && isPlaying) {
-  //     audioRef.current.play().catch((e) => {
-  //       console.warn('Ошибка воспроизведения:', e);
-  //     });
-  //   }
-  // }, [isPlaying]);
-
   const handleLoadedMetadata = () => {
     if (audioRef.current) {
       const duration = audioRef.current.duration;
@@ -89,8 +47,6 @@ export const Radio = ({ radioItems }: { radioItems: ShowcaseRadio[] }) => {
   const timeUpdateHandler = (e: React.ChangeEvent<HTMLMediaElement>) => {
     const current = e.target.currentTime;
     const duration = e.target.duration;
-    // const roundedCurrent = Math.round(current);
-    // const roundedDuration = Math.round(duration);
     const animationPercentage = (current / duration) * 100;
 
     setSongInfo({
@@ -114,18 +70,34 @@ export const Radio = ({ radioItems }: { radioItems: ShowcaseRadio[] }) => {
       }
     }
   }, [currentSong]);
-  
+
+  // Функции переключения эфиров
+  const prevSong = () => {
+    const currentIndex = radioItems.findIndex((s) => s.title === currentSong.title);
+    const prevIndex = (currentIndex - 1 + radioItems.length) % radioItems.length;
+    setCurrentSong(radioItems[prevIndex]);
+  };
+
+  const nextSong = () => {
+    const currentIndex = radioItems.findIndex((s) => s.title === currentSong.title);
+    const nextIndex = (currentIndex + 1) % radioItems.length;
+    setCurrentSong(radioItems[nextIndex]);
+  };
+
   return (
     <section className={styles.wrapper}>
       <div className={styles.container}>
         <div className={styles.frame}>
           <div className={styles.broadcastWrapper}>
             <div>
-              <div className={styles.currentTrackWrapper} onClick={() => setShowRadioList(!showRadioList)}>
-                  <Typography className={styles.live} tag='p' variant='text5'>
-                    в&nbsp;эфире:
-                  </Typography>
+              <div className={styles.currentTrackWrapper}>
+                <Typography tag='p' variant='text5' className={styles.textPlay}>
+                  в&nbsp;эфире:
+                </Typography>
 
+                <button aria-label='назад' className='splide__arrow splide__arrow--prev arrow' style={{ position: 'static' }} onClick={prevSong}>
+                  <IconArrowPrev />
+                </button>
                 <div className={styles.artist}>
                   {currentSong && (
                     <>
@@ -143,6 +115,9 @@ export const Radio = ({ radioItems }: { radioItems: ShowcaseRadio[] }) => {
                     </>
                   )}
                 </div>
+                <button aria-label='вперёд' className='splide__arrow splide__arrow--next' style={{ position: 'static' }} onClick={nextSong}>
+                  <IconArrowNext />
+                </button>
               </div>
 
               <div style={{ width: '70vw' }}>
