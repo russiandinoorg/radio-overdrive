@@ -12,6 +12,7 @@ export const PlayerSong: FC<PlayerSongProps> = ({
   audioRef,
   setSongInfo,
   songInfo,
+  renderControlsWrapper,
 }) => {
  
   const dragHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -36,20 +37,28 @@ export const PlayerSong: FC<PlayerSongProps> = ({
     transform: `translateX(${songInfo?.animationPercentage}%)`,
   };
 
+  const controlButton = !isPlaying ? (
+  <button
+    aria-label='включить'
+    className={styles.play}
+    onClick={playSongHandler}
+  >
+    <IconButtonPlay />
+  </button>
+) : (
+  <button
+    aria-label='выключить'
+    className={styles.pause}
+    onClick={playSongHandler}
+  >
+    <IconButtonStop />
+  </button>
+);
+
   return (
     <div className={styles.player}>
       <div className={styles.playControl}>
-        {!isPlaying ? (
-          // eslint-disable-next-line @typescript-eslint/no-misused-promises
-          <button aria-label='включить' className={styles.play} onClick={playSongHandler}>
-            <IconButtonPlay />
-          </button>
-        ) : (
-          // eslint-disable-next-line @typescript-eslint/no-misused-promises
-          <button aria-label='выключить' className={styles.pause} onClick={playSongHandler}>
-            <IconButtonStop />
-          </button>
-        )}
+        {renderControlsWrapper ? renderControlsWrapper(controlButton) : controlButton}
       </div>
       {songInfo && (
         <div className={styles.timeControl}>

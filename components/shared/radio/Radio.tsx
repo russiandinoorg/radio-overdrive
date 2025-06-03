@@ -2,6 +2,7 @@
 
 import { getFile } from '@sanity/asset-utils';
 import classnames from 'classnames';
+import Image from 'next/image';
 import { useRef, useState, useEffect } from 'react';
 import Typograf from 'typograf';
 
@@ -13,7 +14,9 @@ import type { ShowcaseRadio } from '@/types/types';
 import styles from './radio.module.scss';
 import type { AudioFile } from './types';
 import { Volume } from '../player/Volume';
-import { IconArrowNext, IconArrowPrev } from '@/components/icons';
+
+import { IconArrowBack } from '@/components/icons/IconArrowBack';
+import { IconArrowForward } from '@/components/icons/IconArrowForward'
 
 const tp = new Typograf({ locale: ['ru', 'en-US'] });
 
@@ -94,17 +97,13 @@ export const Radio = ({ radioItems }: { radioItems: ShowcaseRadio[] }) => {
                 <Typography tag='p' variant='text5' className={styles.textPlay}>
                   в&nbsp;эфире:
                 </Typography>
-
-                <button aria-label='назад' className='splide__arrow splide__arrow--prev arrow' style={{ position: 'static' }} onClick={prevSong}>
-                  <IconArrowPrev />
-                </button>
                 <div className={styles.artist}>
                   {currentSong && (
                     <>
                       <Typography className={styles.title} tag='p' variant='text3'>
                         {currentSong?.title}
                       </Typography>
-                      <div style={{ display: 'flex', gap: '15px' }}>
+                      <div style={{ display: 'flex', gap: '15px', marginLeft: '10px' }}>
                         <Typography className={styles.artistText} tag='p' variant='text'>
                           {tp.execute(currentSong.presenter)}
                         </Typography>
@@ -115,21 +114,29 @@ export const Radio = ({ radioItems }: { radioItems: ShowcaseRadio[] }) => {
                     </>
                   )}
                 </div>
-                <button aria-label='вперёд' className='splide__arrow splide__arrow--next' style={{ position: 'static' }} onClick={nextSong}>
-                  <IconArrowNext />
-                </button>
               </div>
-
-              <div style={{ width: '70vw' }}>
-                <Player.PlayerSong
-                  audioRef={audioRef}
-                  isPlaying={isPlaying}
-                  setIsPlaying={setIsPlaying}
-                  songInfo={songInfo}
-                  setSongInfo={setSongInfo}
-                />
+              <div className={styles.controls}>
+                <div style={{ width: '70vw' }}>
+                  <Player.PlayerSong
+                    audioRef={audioRef}
+                    isPlaying={isPlaying}
+                    setIsPlaying={setIsPlaying}
+                    songInfo={songInfo}
+                    setSongInfo={setSongInfo}
+                    renderControlsWrapper={(control) => (
+                      <div className={styles.controls}>
+                        <div className={styles.controls_arrow} aria-label="назад" onClick={prevSong}>
+                          <IconArrowBack />
+                        </div>
+                        {control}
+                        <div className={styles.controls_arrow} aria-label="вперёд" onClick={nextSong}>
+                          <IconArrowForward />
+                        </div>
+                      </div>
+                    )}
+                  />
+                </div>
               </div>
-
               <audio
                 ref={audioRef}
                 src={currentSong ? getAudioUrl(currentSong) : ''}

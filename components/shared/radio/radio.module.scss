@@ -1,4 +1,5 @@
 @import '/styles/variables';
+@import '/styles/mixins.scss';
 
 .container {
   position: fixed;
@@ -45,7 +46,7 @@
   display: flex;
   align-items: center;
   gap: 15px;
-  margin: 6px 0 -30px 7vw;
+  margin: 6px 0 -30px 11vw;
 }
 
 
@@ -280,6 +281,24 @@
   left: 30%;
 }
 
+.controls {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.controls_arrow  svg{
+  background: transparent;
+  cursor: pointer;
+  @include svg-link(stroke, $base-color);
+  @include svg-link(fill, $base-color);
+}
+
+.controls_arrow:hover svg {
+  @include svg-link-hover(stroke, rgba(146, 55, 212, 0.5019607843));
+  @include svg-link-hover(fill, rgba(146, 55, 212, 0.5019607843));
+}
+
 @media screen and (max-width: $laptop-query) {
   .frame {
     min-height: 80px;
@@ -340,7 +359,7 @@
   .currentTrackWrapper {
     justify-content: center;
     gap: 5%;
-    margin-left: 14vw;
+    margin-left: 20vw;
   }
 
   .title {
@@ -362,7 +381,7 @@
     font-size: 14px;
   }
 
-    .textPlay {
+  .textPlay {
     display: none;
   }
 
