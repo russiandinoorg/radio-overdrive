@@ -100,9 +100,15 @@ export const Radio = ({ radioItems }: { radioItems: ShowcaseRadio[] }) => {
                 <div className={styles.artist}>
                   {currentSong && (
                     <>
-                      <Typography className={styles.title} tag='p' variant='text3'>
-                        {currentSong?.title}
-                      </Typography>
+                      <div className={styles.marquee}>
+                        <div className={styles.marqueeContent}>
+                          {[...Array(2)].map((_, i) => (
+                            <Typography className={styles.title} tag='p' variant='text3'>
+                              {currentSong?.title}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                            </Typography>
+                          ))}
+                        </div>
+                      </div>
                       <div style={{ display: 'flex', gap: '15px', marginLeft: '10px' }}>
                         <Typography className={styles.artistText} tag='p' variant='text'>
                           {tp.execute(currentSong.presenter)}
