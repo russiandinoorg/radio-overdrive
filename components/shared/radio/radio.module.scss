@@ -288,7 +288,37 @@
   gap: 10px;
 }
 
-.controls_arrow  svg{
+.marquee {
+  width: 500px;
+  overflow: hidden;
+  white-space: nowrap;
+
+   mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent);
+  -webkit-mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent);
+}
+
+.marqueeContent {
+  display: flex;
+  width: fit-content;
+  animation: marquee 10s linear infinite;
+}
+
+.title {
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+
+@keyframes marquee {
+  0% {
+    transform: translateX(0%);
+  }
+
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+.controls_arrow svg {
   background: transparent;
   cursor: pointer;
   @include svg-link(stroke, $base-color);
@@ -324,6 +354,10 @@
   .live {
     font-size: 14px;
   }
+
+  .marquee {
+  width: 300px;
+}
 
   .title {
     font-size: 12px;
@@ -363,7 +397,7 @@
     margin-left: 20vw;
   }
 
-  .title {
+  .marquee {
     display: none;
   }
 
