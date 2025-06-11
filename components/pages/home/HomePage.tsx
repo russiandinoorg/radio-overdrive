@@ -66,7 +66,7 @@ export const HomePage = ({ data }: HomePageProps) => {
                     <IconArrowNextLong />
                   </div>
                   <Typography className={styles.slogan} tag='div' variant='text6'>
-                    <p>Независимое радио без рекламы,</p>
+                    <p>Независимое радио без рекламы</p>
                     <p>ипотеки и средств против импотенции —</p>
                   </Typography>
                   <Typography className={styles.slogan_bold} tag='div' variant='text7'>
