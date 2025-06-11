@@ -1,4 +1,5 @@
 @import '/styles/variables';
+@import '/styles/mixins.scss';
 
 .container {
   position: fixed;
@@ -45,7 +46,7 @@
   display: flex;
   align-items: center;
   gap: 15px;
-  margin: 6px 0 -30px 7vw;
+  margin: 6px 0 -30px 11vw;
 }
 
 
@@ -281,8 +282,52 @@
   left: 30%;
 }
 
-.textPlay {
-  margin-right: 10%;
+.controls {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.marquee {
+  width: 500px;
+  overflow: hidden;
+  white-space: nowrap;
+
+   mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent);
+  -webkit-mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent);
+}
+
+.marqueeContent {
+  display: flex;
+  width: fit-content;
+  animation: marquee 10s linear infinite;
+}
+
+.title {
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+
+@keyframes marquee {
+  0% {
+    transform: translateX(0%);
+  }
+
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+.controls_arrow svg {
+  background: transparent;
+  cursor: pointer;
+  @include svg-link(stroke, $base-color);
+  @include svg-link(fill, $base-color);
+}
+
+.controls_arrow:hover svg {
+  @include svg-link-hover(stroke, rgba(146, 55, 212, 0.5019607843));
+  @include svg-link-hover(fill, rgba(146, 55, 212, 0.5019607843));
 }
 
 @media screen and (max-width: $laptop-query) {
@@ -309,6 +354,10 @@
   .live {
     font-size: 14px;
   }
+
+  .marquee {
+  width: 300px;
+}
 
   .title {
     font-size: 12px;
@@ -345,10 +394,10 @@
   .currentTrackWrapper {
     justify-content: center;
     gap: 5%;
-    margin-left: 14vw;
+    margin-left: 20vw;
   }
 
-  .title {
+  .marquee {
     display: none;
   }
 

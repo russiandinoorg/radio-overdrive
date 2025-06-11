@@ -34,6 +34,7 @@ export interface PlayerSongProps {
   setSongs?: Dispatch<SetStateAction<ShowcaseRadio[]>>;
   songInfo?: ISongInfo;
   songs?: ShowcaseRadio[];
+  renderControlsWrapper?: (controls: React.ReactNode) => React.ReactNode;
 }
 
 export interface SongProps {
