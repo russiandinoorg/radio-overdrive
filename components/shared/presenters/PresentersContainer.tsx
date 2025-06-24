@@ -10,7 +10,7 @@ export const PresentersContainer = ({
 }) => (
   <div
     className={
-      Array.isArray(showcasePresenters) && showcasePresenters.length <= 5
+      Array.isArray(showcasePresenters) && showcasePresenters.length <= 6
         ? styles.cards_container
         : styles.cards_containerBig
     }

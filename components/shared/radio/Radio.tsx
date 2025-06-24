@@ -2,7 +2,6 @@
 
 import { getFile } from '@sanity/asset-utils';
 import classnames from 'classnames';
-import Image from 'next/image';
 import { useRef, useState, useEffect } from 'react';
 import Typograf from 'typograf';
 
@@ -31,6 +30,7 @@ export const Radio = ({ radioItems }: { radioItems: ShowcaseRadio[] }) => {
     duration: 0,
     animationPercentage: 0,
   });
+  const [hasMovedForward, setHasMovedForward] = useState(false);
 
   const getAudioUrl = (song: ShowcaseRadio) => {
     // @ts-expect-error sanity
@@ -79,12 +79,16 @@ export const Radio = ({ radioItems }: { radioItems: ShowcaseRadio[] }) => {
     const currentIndex = radioItems.findIndex((s) => s.title === currentSong.title);
     const prevIndex = (currentIndex - 1 + radioItems.length) % radioItems.length;
     setCurrentSong(radioItems[prevIndex]);
+    if (prevIndex === 0) {
+      setHasMovedForward(false);
+    }
   };
 
   const nextSong = () => {
     const currentIndex = radioItems.findIndex((s) => s.title === currentSong.title);
     const nextIndex = (currentIndex + 1) % radioItems.length;
     setCurrentSong(radioItems[nextIndex]);
+    setHasMovedForward(true);
   };
 
   return (
@@ -109,13 +113,14 @@ export const Radio = ({ radioItems }: { radioItems: ShowcaseRadio[] }) => {
                           ))}
                         </div>
                       </div>
-                      <div style={{ display: 'flex', gap: '15px', marginLeft: '10px' }}>
-                        <Typography className={styles.artistText} tag='p' variant='text'>
-                          {tp.execute(currentSong.presenter)}
-                        </Typography>
-                        <Typography className={styles.artistText} tag='p' variant='text'>
-                          {tp.execute(currentSong.date)}
-                        </Typography>
+                      <div className={styles.presenter}>
+                        <div className={styles.marqueePresenter}>
+                          {[...Array(2)].map((_, i) => (
+                            <Typography className={styles.artistText} tag='p' variant='text' key={i}>
+                              {tp.execute(currentSong.presenter)}&nbsp;{tp.execute(currentSong.date)}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                            </Typography>
+                          ))}
+                        </div>
                       </div>
                     </>
                   )}
@@ -131,7 +136,13 @@ export const Radio = ({ radioItems }: { radioItems: ShowcaseRadio[] }) => {
                     setSongInfo={setSongInfo}
                     renderControlsWrapper={(control) => (
                       <div className={styles.controls}>
-                        <div className={styles.controls_arrow} aria-label="назад" onClick={prevSong}>
+                        <div
+                          className={classnames(styles.controls_arrow, {
+                            [styles.hidden]: !hasMovedForward,
+                          })}
+                          aria-label="назад"
+                          onClick={hasMovedForward ? prevSong : undefined}
+                        >
                           <IconArrowBack />
                         </div>
                         {control}
