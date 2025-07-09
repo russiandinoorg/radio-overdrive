@@ -296,6 +296,41 @@
   gap: 10px;
 }
 
+.desktopView {
+  display: flex;
+
+  @media (max-width: 768px) {
+    display: none;
+  }
+}
+
+.mobileView {
+  display: none;
+
+  @media (max-width: 768px) {
+    display: block;
+    overflow: hidden;
+  }
+}
+
+.marqueeMobile {
+  width: 45vw;
+  overflow: hidden;
+  white-space: nowrap;
+  mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent);
+  -webkit-mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent);
+}
+
+.marqueeContentMobile {
+  display: inline-block;
+  animation: marquee 10s linear infinite;
+}
+
+.mobileText {
+  display: inline;
+  font-size: 14px;
+}
+
 .marquee {
   width: 500px;
   overflow: hidden;
@@ -421,7 +456,7 @@
 
 @media screen and (max-width: 863px) {
   .frame {
-    width: $base-width-mobile;
+    width: 93vw;
   }
 
   .live {
@@ -431,25 +466,13 @@
   .currentTrackWrapper {
     justify-content: center;
     gap: 5%;
-    margin-left: 20vw;
-  }
-
-  .marquee {
-    display: none;
+    margin-left: 15vw;
   }
 
   .marqueePresenter {
     display: flex;
     width: fit-content;
     animation: marquee 12s linear infinite;
-  }
-
-  .presenter {
-    width: 300px;
-    overflow: hidden;
-    white-space: nowrap;
-    mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent);
-    -webkit-mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent);
   }
 
   .trackWrapper {
@@ -482,8 +505,8 @@
   }
 }
 
-@media (max-width: 500px) {
-  .presenter {
-    width: 45vw;
-  }
+@media (max-width: 360px) {
+.mobileText {
+  font-size: 12px;
+}
 }

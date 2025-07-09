@@ -104,22 +104,33 @@ export const Radio = ({ radioItems }: { radioItems: ShowcaseRadio[] }) => {
                 <div className={styles.artist}>
                   {currentSong && (
                     <>
-                      <div className={styles.marquee}>
-                        <div className={styles.marqueeContent}>
-                          {[...Array(2)].map((_, i) => (
-                            <Typography className={styles.title} tag='p' variant='text3'>
-                              {currentSong?.title}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                            </Typography>
-                          ))}
+                      <div className={styles.desktopView}>
+                        <div className={styles.marquee}>
+                          <div className={styles.marqueeContent}>
+                            {[...Array(2)].map((_, i) => (
+                              <Typography className={styles.title} tag='p' variant='text3'>
+                                {currentSong?.title}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                              </Typography>
+                            ))}
+                          </div>
+                        </div>
+                        <div className={styles.presenter}>
+                          <Typography className={styles.artistText} tag="p" variant="text">
+                            {tp.execute(currentSong.presenter)}&nbsp;{tp.execute(currentSong.date)}
+                          </Typography>
                         </div>
                       </div>
-                      <div className={styles.presenter}>
-                        <div className={styles.marqueePresenter}>
-                          {[...Array(2)].map((_, i) => (
-                            <Typography className={styles.artistText} tag='p' variant='text' key={i}>
-                              {tp.execute(currentSong.presenter)}&nbsp;{tp.execute(currentSong.date)}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                            </Typography>
-                          ))}
+
+                      <div className={styles.mobileView}>
+                        <div className={styles.marqueeMobile}>
+                          <div className={styles.marqueeContentMobile}>
+                            {[...Array(2)].map((_, i) => (
+                              <Typography className={styles.mobileText} tag="p" variant="text3" key={`mobile-${i}`}>
+                                {currentSong?.title}&nbsp; &nbsp;
+                                {tp.execute(currentSong.presenter)}&nbsp;{tp.execute(currentSong.date)}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                              </Typography>
+                            ))}
+                          </div>
                         </div>
                       </div>
                     </>

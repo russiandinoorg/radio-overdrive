@@ -97,10 +97,10 @@ export const HomePage = ({ data }: HomePageProps) => {
             <div className={styles.container_text}>
               <div className={styles.title_wrapper}>
                 <Typography className={styles.title} tag='h3' variant='title3'>
-                  ЛЮБОВЬ,
+                  ЛЮБОВЬ
                 </Typography>
                 <Typography className={styles.title} tag='h3' variant='title3'>
-                  СВОБОДА,
+                  СВОБОДА
                 </Typography>
                 <Typography className={styles.title} tag='h3' variant='title3'>
                   ДИКОСТЬ
