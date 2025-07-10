@@ -33,7 +33,7 @@
 .broadcastWrapper {
   width: 100%;
   display: flex;
-  justify-content: space-between;
+  justify-content: space-evenly;
   align-items: center;
   gap: 20px;
 }
@@ -298,6 +298,7 @@
 
 .desktopView {
   display: flex;
+  gap: 2vw;
 
   @media (max-width: 768px) {
     display: none;
@@ -505,8 +506,15 @@
   }
 }
 
-@media (max-width: 360px) {
-.mobileText {
-  font-size: 12px;
+@media (max-width: 500px) {
+  .marqueeMobile {
+    margin-left: 10vw;
+    margin-bottom: 5px;
+  }
 }
+
+@media (max-width: 360px) {
+  .mobileText {
+    font-size: 12px;
+  }
 }
