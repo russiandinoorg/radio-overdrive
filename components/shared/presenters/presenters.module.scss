@@ -3,7 +3,7 @@
 
 .cards_container {
   position: relative;
-  width: 1000px;
+  width: 1200px;
   height: 600px;
   margin-left: auto;
   margin-right: auto;
@@ -165,6 +165,10 @@
   padding: 10px 10px 10px 14px;
   transform: translateY(60px);
   opacity: 0;
+  will-change: transform, opacity;
+  transition: transform 400ms ease, opacity 400ms ease;
+  backface-visibility: hidden;
+  -webkit-transform: translateY(60px);
 }
 
 .card_title {
@@ -221,13 +225,11 @@
     font-size: 18px;
   }
 
-  // .box:nth-child(odd) {
-  //   transform: translateY(0px);
-  // }
-
-  // .box:nth-child(even) {
-  //   transform: translateY(0px);
-  // }
+  .box.isActive .card_info {
+    transform: translateY(0);
+    -webkit-transform: translateY(0);
+    opacity: 1;
+  }
 }
 
 @media screen and (max-width: $mobile-query) {

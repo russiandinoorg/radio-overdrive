@@ -60,6 +60,12 @@ export interface ShowcasePresenter {
   day?: string;
 }
 
+export type PresenterListItemProps = {
+  presenter: ShowcasePresenter;
+  isActive: boolean;
+  onClick: () => void;
+}
+
 export interface ShowcaseRadio {
   tracklist: string[];
   title: string;
