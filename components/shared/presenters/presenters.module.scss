@@ -41,7 +41,17 @@
   height: 0;
 }
 
-@media (hover: hover) {
+@media (hover: hover) and (pointer: fine) {
+  .box .card_info {
+    transform: translateY(60px);
+    opacity: 0;
+  }
+
+  .box:hover .card_info {
+    transform: translateY(0);
+    opacity: 1;
+  }
+
   .cards_container:hover .box {
     filter: grayscale(100%) opacity(24%);
     cursor: pointer;
@@ -58,7 +68,6 @@
       .card_info {
         transform: translateY(0);
         opacity: 1;
-        transition: all 400ms;
         transition-delay: 400ms;
       }
     }
@@ -71,7 +80,6 @@
       .card_info {
         transform: translateY(0);
         opacity: 1;
-        transition: all 400ms;
         transition-delay: 400ms;
       }
     }
@@ -84,7 +92,6 @@
       .card_info {
         transform: translateY(0);
         opacity: 1;
-        transition: all 400ms;
         transition-delay: 400ms;
       }
     }
@@ -97,7 +104,6 @@
       .card_info {
         transform: translateY(0);
         opacity: 1;
-        transition: all 400ms;
         transition-delay: 400ms;
       }
     }
@@ -110,7 +116,6 @@
       .card_info {
         transform: translateY(0);
         opacity: 1;
-        transition: all 400ms;
         transition-delay: 400ms;
       }
     }
@@ -123,7 +128,6 @@
       .card_info {
         transform: translateY(0);
         opacity: 1;
-        transition: all 400ms;
         transition-delay: 400ms;
       }
     }
@@ -163,16 +167,15 @@
   background: rgba(56, 55, 82, 0.4);
   backdrop-filter: blur(7.5px);
   padding: 10px 10px 10px 14px;
-  transform: translateY(60px);
-  opacity: 0;
+  transform: translateY(0);
+  opacity: 1;
   will-change: transform, opacity;
   transition: transform 400ms ease, opacity 400ms ease;
-  backface-visibility: hidden;
-  -webkit-transform: translateY(60px);
 }
 
 .card_title {
   margin: 20px 0 10px 0;
+  font-size: 19px;
 }
 
 .card_description {
@@ -217,26 +220,14 @@
     flex-shrink: 0;
   }
 
-  .card_info:hover {
-    opacity: 1;
-  }
-
   .card_title {
     font-size: 18px;
-  }
-
-  .box.isActive .card_info {
-    transform: translateY(0);
-    -webkit-transform: translateY(0);
-    opacity: 1;
   }
 }
 
 @media screen and (max-width: $mobile-query) {
-  .cards_container {
-    width: 85vw;
-  }
 
+  .cards_container,
   .cards_containerBig {
     width: 85vw;
   }

@@ -3,14 +3,13 @@ import type { PortableTextBlock } from 'next-sanity';
 import { Typography } from '@/components';
 import { ImageBox } from '@/components/shared/customImg/ImageBox';
 import { CustomPortableText } from '@/components/shared/customText/CustomPortableText';
-import type { PresenterListItemProps } from '@/types/types';
+import type { ShowcasePresenter } from '@/types/types';
 import { presentersBlurData } from '@/utils/helpers';
 
 import styles from './presenters.module.scss';
 
-export const PresenterListItem = ({ presenter, isActive = false, onClick }: PresenterListItemProps ) => (
-  <div className={`${styles.box} ${isActive ? styles.isActive : ''}`}
-  onClick={onClick}>
+export const PresenterListItem = ({ presenter }: { presenter: ShowcasePresenter } ) => (
+  <div className={styles.box}>
     <ImageBox
       alt={`Cover image from ${presenter.name}`}
       blurData={presentersBlurData}

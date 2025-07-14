@@ -10,28 +10,16 @@ export const PresentersContainer = ({
   showcasePresenters,
 }: {
   showcasePresenters: ShowcasePresenter[];
-}) => {
-  const [activeIndex, setActiveIndex] = useState<number | null>(null);
-
-  const handleClick = (index: number) => {
-    setActiveIndex((prev) => (prev === index ? null : index));
-  };
-  const containerClass =
-    Array.isArray(showcasePresenters) && showcasePresenters.length <= 6
+}) => (
+  <div
+    className={Array.isArray(showcasePresenters) && showcasePresenters.length <= 6
       ? styles.cards_container
-      : styles.cards_containerBig;
-
-  return (
-    <div
-      className={containerClass}
-    >
-      {showcasePresenters.map((presenter, index) => (
-        <PresenterListItem
-          key={index}
-          presenter={presenter}
-          isActive={index === activeIndex}
-          onClick={() => handleClick(index)} />
-      ))}
-    </div>
-  )
-};
+      : styles.cards_containerBig}
+  >
+    {showcasePresenters.map((presenter, key) => (
+      <PresenterListItem
+        key={key}
+        presenter={presenter} />
+    ))}
+  </div>
+);
