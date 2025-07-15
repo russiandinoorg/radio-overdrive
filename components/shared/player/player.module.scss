@@ -10,11 +10,13 @@
   background: transparent;
   box-shadow: 2px 2px 50px rgba(0, 0, 0, 0.205);
   overflow: scroll;
-  scrollbar-width: none; 
-  -ms-overflow-style: none; /* IE/Edge */
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+  /* IE/Edge */
 
   &::-webkit-scrollbar {
-    display: none; /* Chrome, Safari */
+    display: none;
+    /* Chrome, Safari */
   }
 }
 
@@ -112,6 +114,12 @@
 
   .time {
     align-self: flex-end;
+  }
+}
+
+@media screen and (max-width: 1440px) {
+  .timeControl {
+    margin-top: 15px;
   }
 }
 
@@ -310,6 +318,8 @@
   }
 
   .timeControl {
+    margin-top: 13px;
+
     .time {
       font-size: 12px;
     }
@@ -475,7 +485,7 @@
   }
 
   .volume {
-  position: relative;
+    position: relative;
   }
 
   .range {
