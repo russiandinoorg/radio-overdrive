@@ -22,6 +22,7 @@
 }
 
 .frame {
+  position: relative;
   width: $base-width;
   min-height: 100px;
   margin: 0 auto;
@@ -43,10 +44,13 @@
 }
 
 .currentTrackWrapper {
+  position: absolute;
+  left: 40px;
+  bottom: 10vh;
   display: flex;
   align-items: center;
   gap: 20px;
-  margin: 6px 0 -30px 11vw;
+  margin: 5px 0 -30px 11vw;
 }
 
 .artist {
@@ -397,6 +401,7 @@
 
   .currentTrackWrapper {
     align-items: flex-start;
+    bottom: 8vh;
   }
 
   .artistText::before {
@@ -467,7 +472,7 @@
   .currentTrackWrapper {
     justify-content: center;
     gap: 5%;
-    margin-left: 15vw;
+    margin-left: 19vw;
   }
 
   .marqueePresenter {
@@ -507,6 +512,10 @@
 }
 
 @media (max-width: 500px) {
+  .currentTrackWrapper {
+    bottom: 7vh;
+    margin-left: 9vw;
+  }
   .marqueeMobile {
     margin-left: 10vw;
     margin-bottom: 5px;
