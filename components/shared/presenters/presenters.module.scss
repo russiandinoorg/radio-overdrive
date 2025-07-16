@@ -193,7 +193,6 @@
 }
 
 @media screen and (max-width: $tablet-query) {
-
   .cards_container,
   .cards_containerBig {
     width: 90vw;
@@ -223,10 +222,14 @@
   .card_title {
     font-size: 18px;
   }
+
+  .card_info.hidden {
+    transform: translateY(100%);
+    opacity: 0;
+  }
 }
 
 @media screen and (max-width: $mobile-query) {
-
   .cards_container,
   .cards_containerBig {
     width: 85vw;

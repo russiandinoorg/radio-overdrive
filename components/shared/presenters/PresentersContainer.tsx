@@ -1,6 +1,5 @@
 'use client';
 
-import { useState } from 'react';
 import type { ShowcasePresenter } from '@/types/types';
 
 import { PresenterListItem } from './PresenterListItem';
