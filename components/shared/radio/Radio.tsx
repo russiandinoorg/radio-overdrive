@@ -2,7 +2,6 @@
 
 import { getFile } from '@sanity/asset-utils';
 import classnames from 'classnames';
-import Image from 'next/image';
 import { useRef, useState, useEffect } from 'react';
 import Typograf from 'typograf';
 
@@ -31,6 +30,7 @@ export const Radio = ({ radioItems }: { radioItems: ShowcaseRadio[] }) => {
     duration: 0,
     animationPercentage: 0,
   });
+  const [hasMovedForward, setHasMovedForward] = useState(false);
 
   const getAudioUrl = (song: ShowcaseRadio) => {
     // @ts-expect-error sanity
@@ -39,6 +39,15 @@ export const Radio = ({ radioItems }: { radioItems: ShowcaseRadio[] }) => {
       song.audio && projectId && getFile(song.audio.asset, client.config());
     return audioFile.asset.url;
   };
+
+  useEffect(() => {
+    if (audioRef.current) {
+      audioRef.current.load();
+      if (isPlaying) {
+        audioRef.current.play().catch(console.warn);
+      }
+    }
+  }, [currentSong]);
 
   const handleLoadedMetadata = () => {
     if (audioRef.current) {
@@ -63,28 +72,24 @@ export const Radio = ({ radioItems }: { radioItems: ShowcaseRadio[] }) => {
     const currentIndex = radioItems.findIndex((song) => song.title === currentSong.title);
     const nextSong = radioItems[(currentIndex + 1) % radioItems.length];
     setCurrentSong(nextSong);
+    setHasMovedForward(true);
   };
-
-  useEffect(() => {
-    if (audioRef.current) {
-      audioRef.current.load();
-      if (isPlaying) {
-        audioRef.current.play().catch(console.warn);
-      }
-    }
-  }, [currentSong]);
 
   // Функции переключения эфиров
   const prevSong = () => {
     const currentIndex = radioItems.findIndex((s) => s.title === currentSong.title);
     const prevIndex = (currentIndex - 1 + radioItems.length) % radioItems.length;
     setCurrentSong(radioItems[prevIndex]);
+    if (prevIndex === 0) {
+      setHasMovedForward(false);
+    }
   };
 
   const nextSong = () => {
     const currentIndex = radioItems.findIndex((s) => s.title === currentSong.title);
     const nextIndex = (currentIndex + 1) % radioItems.length;
     setCurrentSong(radioItems[nextIndex]);
+    setHasMovedForward(true);
   };
 
   return (
@@ -92,14 +97,14 @@ export const Radio = ({ radioItems }: { radioItems: ShowcaseRadio[] }) => {
       <div className={styles.container}>
         <div className={styles.frame}>
           <div className={styles.broadcastWrapper}>
-            <div>
-              <div className={styles.currentTrackWrapper}>
-                <Typography tag='p' variant='text5' className={styles.textPlay}>
-                  в&nbsp;эфире:
-                </Typography>
-                <div className={styles.artist}>
-                  {currentSong && (
-                    <>
+            <div className={styles.currentTrackWrapper}>
+              <Typography tag='p' variant='text5' className={styles.textPlay}>
+                в&nbsp;эфире:
+              </Typography>
+              <div className={styles.artist}>
+                {currentSong && (
+                  <>
+                    <div className={styles.desktopView}>
                       <div className={styles.marquee}>
                         <div className={styles.marqueeContent}>
                           {[...Array(2)].map((_, i) => (
@@ -109,58 +114,70 @@ export const Radio = ({ radioItems }: { radioItems: ShowcaseRadio[] }) => {
                           ))}
                         </div>
                       </div>
-                      <div style={{ display: 'flex', gap: '15px', marginLeft: '10px' }}>
-                        <Typography className={styles.artistText} tag='p' variant='text'>
-                          {tp.execute(currentSong.presenter)}
-                        </Typography>
-                        <Typography className={styles.artistText} tag='p' variant='text'>
-                          {tp.execute(currentSong.date)}
+                      <div className={styles.presenter}>
+                        <Typography className={styles.artistText} tag="p" variant="text">
+                          {tp.execute(currentSong.presenter)}&nbsp;{tp.execute(currentSong.date)}
                         </Typography>
                       </div>
-                    </>
-                  )}
-                </div>
-              </div>
-              <div className={styles.controls}>
-                <div style={{ width: '70vw' }}>
-                  <Player.PlayerSong
-                    audioRef={audioRef}
-                    isPlaying={isPlaying}
-                    setIsPlaying={setIsPlaying}
-                    songInfo={songInfo}
-                    setSongInfo={setSongInfo}
-                    renderControlsWrapper={(control) => (
-                      <div className={styles.controls}>
-                        <div className={styles.controls_arrow} aria-label="назад" onClick={prevSong}>
-                          <IconArrowBack />
-                        </div>
-                        {control}
-                        <div className={styles.controls_arrow} aria-label="вперёд" onClick={nextSong}>
-                          <IconArrowForward />
-                        </div>
-                      </div>
-                    )}
-                  />
-                </div>
-              </div>
-              <audio
-                ref={audioRef}
-                src={currentSong ? getAudioUrl(currentSong) : ''}
-                onEnded={songEndHandler}
-                onLoadedMetadata={handleLoadedMetadata}
-                onTimeUpdate={timeUpdateHandler}
-              >
-                <track kind='captions' />
-                {currentSong && <source src={getAudioUrl(currentSong)} type='audio/mp3' />}
-              </audio>
-            </div>
+                    </div>
 
+                    <div className={styles.mobileView}>
+                      <div className={styles.marqueeMobile}>
+                        <div className={styles.marqueeContentMobile}>
+                          {[...Array(2)].map((_, i) => (
+                            <Typography className={styles.mobileText} tag="p" variant="text3" key={`mobile-${i}`}>
+                              {currentSong?.title}&nbsp; &nbsp;
+                              {tp.execute(currentSong.presenter)}&nbsp;{tp.execute(currentSong.date)}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                            </Typography>
+                          ))}
+                        </div>
+                      </div>
+                    </div>
+                  </>
+                )}
+              </div>
+            </div>
+            <div className={styles.controls}>
+              <div style={{ width: '70vw' }}>
+                <Player.PlayerSong
+                  audioRef={audioRef}
+                  isPlaying={isPlaying}
+                  setIsPlaying={setIsPlaying}
+                  songInfo={songInfo}
+                  setSongInfo={setSongInfo}
+                  renderControlsWrapper={(control) => (
+                    <div className={styles.controls}>
+                      <div
+                        className={classnames(styles.controls_arrow, {
+                          [styles.hidden]: !hasMovedForward,
+                        })}
+                        aria-label="назад"
+                        onClick={hasMovedForward ? prevSong : undefined}
+                      >
+                        <IconArrowBack />
+                      </div>
+                      {control}
+                      <div className={styles.controls_arrow} aria-label="вперёд" onClick={nextSong}>
+                        <IconArrowForward />
+                      </div>
+                    </div>
+                  )}
+                />
+              </div>
+            </div>
+            <audio
+              ref={audioRef}
+              src={getAudioUrl(currentSong)}
+              onEnded={songEndHandler}
+              onLoadedMetadata={handleLoadedMetadata}
+              onTimeUpdate={timeUpdateHandler}
+            />
             <div className={styles.volumeContainer}>
               <Volume audioRef={audioRef} />
 
               <button
                 aria-label='открыть / закрыть'
-                className={tracklist ? classnames(styles.button, styles.close) : classnames(styles.button, styles.open)}
+                className={classnames(styles.button, tracklist ? styles.close : styles.open)}
                 onClick={() => settracklist((prev) => !prev)}
               >
                 {[...Array(9)].map((_, i) => (
@@ -172,33 +189,29 @@ export const Radio = ({ radioItems }: { radioItems: ShowcaseRadio[] }) => {
         </div>
       </div>
 
-      <div className={tracklist ? classnames(styles.trackWrapper, styles.open) : styles.trackWrapper}>
+      <div className={classnames(styles.trackWrapper, { [styles.open]: tracklist })}>
         {currentSong?.tracklist?.map((track, i) => (
           <Typography key={i} className={styles.track} tag='p' variant='text4'>
             {track}
           </Typography>
         ))}
 
-        {showRadioList && (
-          <div>
-            {radioItems.map((song) => (
-              <div
-                key={song.title}
-                className={classnames(styles.radioItem, {
-                  [styles.active]: song.title === currentSong?.title,
-                })}
-                onClick={() => {
-                  setCurrentSong(song);
-                  setShowRadioList(false);
-                }}
-              >
-                <Typography tag='p' variant='text4'>
-                  {song.title}
-                </Typography>
-              </div>
-            ))}
+        {showRadioList && radioItems.map((song) => (
+          <div
+            key={song.title}
+            className={classnames(styles.radioItem, {
+              [styles.active]: song.title === currentSong?.title,
+            })}
+            onClick={() => {
+              setCurrentSong(song);
+              setShowRadioList(false);
+            }}
+          >
+            <Typography tag='p' variant='text4'>
+              {song.title}
+            </Typography>
           </div>
-        )}
+        ))}
       </div>
     </section>
   );

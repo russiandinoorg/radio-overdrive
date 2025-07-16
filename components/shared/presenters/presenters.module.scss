@@ -3,12 +3,12 @@
 
 .cards_container {
   position: relative;
-  width: 1000px;
+  width: 1200px;
   height: 600px;
   margin-left: auto;
   margin-right: auto;
   display: grid;
-  grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+  grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr;
   gap: 1em;
   transition: all 400ms;
 }
@@ -41,7 +41,17 @@
   height: 0;
 }
 
-@media (hover: hover) {
+@media (hover: hover) and (pointer: fine) {
+  .box .card_info {
+    transform: translateY(60px);
+    opacity: 0;
+  }
+
+  .box:hover .card_info {
+    transform: translateY(0);
+    opacity: 1;
+  }
+
   .cards_container:hover .box {
     filter: grayscale(100%) opacity(24%);
     cursor: pointer;
@@ -52,69 +62,76 @@
   }
 
   .cards_container:has(.box:nth-child(1):hover) {
-    grid-template-columns: 3fr 1fr 1fr 1fr 1fr;
+    grid-template-columns: 3fr 1fr 1fr 1fr 1fr 1fr;
 
     .box:nth-child(1) {
       .card_info {
         transform: translateY(0);
         opacity: 1;
-        transition: all 400ms;
         transition-delay: 400ms;
       }
     }
   }
 
   .cards_container:has(.box:nth-child(2):hover) {
-    grid-template-columns: 1fr 3fr 1fr 1fr 1fr;
+    grid-template-columns: 1fr 3fr 1fr 1fr 1fr 1fr;
 
     .box:nth-child(2) {
       .card_info {
         transform: translateY(0);
         opacity: 1;
-        transition: all 400ms;
         transition-delay: 400ms;
       }
     }
   }
 
   .cards_container:has(.box:nth-child(3):hover) {
-    grid-template-columns: 1fr 1fr 3fr 1fr 1fr;
+    grid-template-columns: 1fr 1fr 3fr 1fr 1fr 1fr;
 
     .box:nth-child(3) {
       .card_info {
         transform: translateY(0);
         opacity: 1;
-        transition: all 400ms;
         transition-delay: 400ms;
       }
     }
   }
 
   .cards_container:has(.box:nth-child(4):hover) {
-    grid-template-columns: 1fr 1fr 1fr 3fr 1fr;
+    grid-template-columns: 1fr 1fr 1fr 3fr 1fr 1fr;
 
     .box:nth-child(4) {
       .card_info {
         transform: translateY(0);
         opacity: 1;
-        transition: all 400ms;
         transition-delay: 400ms;
       }
     }
   }
 
   .cards_container:has(.box:nth-child(5):hover) {
-    grid-template-columns: 1fr 1fr 1fr 1fr 3fr;
-  
+    grid-template-columns: 1fr 1fr 1fr 1fr 3fr 1fr;
+
     .box:nth-child(5) {
       .card_info {
         transform: translateY(0);
         opacity: 1;
-        transition: all 400ms;
         transition-delay: 400ms;
       }
     }
-  }  
+  }
+
+  .cards_container:has(.box:nth-child(6):hover) {
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr 3fr;
+
+    .box:nth-child(6) {
+      .card_info {
+        transform: translateY(0);
+        opacity: 1;
+        transition-delay: 400ms;
+      }
+    }
+  }
 }
 
 .box {
@@ -127,7 +144,7 @@
   align-items: center;
 }
 
-.box:nth-child(5) {
+.box:nth-child(6) {
   background-position-x: right;
 }
 
@@ -150,12 +167,15 @@
   background: rgba(56, 55, 82, 0.4);
   backdrop-filter: blur(7.5px);
   padding: 10px 10px 10px 14px;
-  transform: translateY(60px);
-  opacity: 0;
+  transform: translateY(0);
+  opacity: 1;
+  will-change: transform, opacity;
+  transition: transform 400ms ease, opacity 400ms ease;
 }
 
 .card_title {
   margin: 20px 0 10px 0;
+  font-size: 19px;
 }
 
 .card_description {
@@ -173,7 +193,7 @@
 }
 
 @media screen and (max-width: $tablet-query) {
-  .cards_container, 
+  .cards_container,
   .cards_containerBig {
     width: 90vw;
     display: flex;
@@ -187,7 +207,7 @@
 
   .cards_container::-webkit-scrollbar,
   .cards_containerBig::-webkit-scrollbar {
-display: none;
+    display: none;
   }
 
   .box {
@@ -199,29 +219,18 @@ display: none;
     flex-shrink: 0;
   }
 
-  @media (hover: hover) {
-    .card_info {
-      opacity: 1;
-    }
-    .card_title {
-      font-size: 18px;
-    }
+  .card_title {
+    font-size: 18px;
   }
 
-  // .box:nth-child(odd) {
-  //   transform: translateY(0px);
-  // }
-
-  // .box:nth-child(even) {
-  //   transform: translateY(0px);
-  // }
+  .card_info.hidden {
+    transform: translateY(100%);
+    opacity: 0;
+  }
 }
 
 @media screen and (max-width: $mobile-query) {
-  .cards_container {
-    width: 85vw;
-  }
-
+  .cards_container,
   .cards_containerBig {
     width: 85vw;
   }
