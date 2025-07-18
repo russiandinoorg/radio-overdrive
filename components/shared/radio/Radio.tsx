@@ -15,7 +15,7 @@ import type { AudioFile } from './types';
 import { Volume } from '../player/Volume';
 
 import { IconArrowBack } from '@/components/icons/IconArrowBack';
-import { IconArrowForward } from '@/components/icons/IconArrowForward'
+import { IconArrowForward } from '@/components/icons/IconArrowForward';
 
 const tp = new Typograf({ locale: ['ru', 'en-US'] });
 
@@ -24,7 +24,7 @@ export const Radio = ({ radioItems }: { radioItems: ShowcaseRadio[] }) => {
   const [tracklist, settracklist] = useState(false);
   const [isPlaying, setIsPlaying] = useState<boolean>(false);
   const [showRadioList, setShowRadioList] = useState(false);
-  const audioRef = useRef<HTMLMediaElement | null>(null);
+  const audioRef = useRef<HTMLAudioElement | null>(null);
   const [songInfo, setSongInfo] = useState({
     currentTime: 0,
     duration: 0,
@@ -34,20 +34,44 @@ export const Radio = ({ radioItems }: { radioItems: ShowcaseRadio[] }) => {
 
   const getAudioUrl = (song: ShowcaseRadio) => {
     // @ts-expect-error sanity
-    const audioFile: AudioFile =
-      // @ts-expect-error sanity
-      song.audio && projectId && getFile(song.audio.asset, client.config());
+    const audioFile: AudioFile = song.audio && projectId && getFile(song.audio.asset, client.config());
     return audioFile.asset.url;
   };
 
   useEffect(() => {
     if (audioRef.current) {
       audioRef.current.load();
-      if (isPlaying) {
-        audioRef.current.play().catch(console.warn);
-      }
+    }
+
+    if ('mediaSession' in navigator && currentSong) {
+      navigator.mediaSession.metadata = new MediaMetadata({
+        title: currentSong.title,
+        artist: tp.execute(currentSong.presenter),
+        album: tp.execute(currentSong.date),
+      });
+
+      navigator.mediaSession.setActionHandler('play', () => {
+        audioRef.current?.play().then(() => setIsPlaying(true)).catch(console.warn);
+      });
+
+      navigator.mediaSession.setActionHandler('pause', () => {
+        audioRef.current?.pause();
+        setIsPlaying(false);
+      });
+
+      navigator.mediaSession.setActionHandler('previoustrack', () => prevSong());
+      navigator.mediaSession.setActionHandler('nexttrack', () => nextSong());
     }
   }, [currentSong]);
+
+  useEffect(() => {
+    if (isPlaying && audioRef.current) {
+      audioRef.current.play().catch((error) => {
+        console.warn('Autoplay error:', error);
+        setIsPlaying(false);
+      });
+    }
+  }, [isPlaying]);
 
   const handleLoadedMetadata = () => {
     if (audioRef.current) {
@@ -75,7 +99,6 @@ export const Radio = ({ radioItems }: { radioItems: ShowcaseRadio[] }) => {
     setHasMovedForward(true);
   };
 
-  // Функции переключения эфиров
   const prevSong = () => {
     const currentIndex = radioItems.findIndex((s) => s.title === currentSong.title);
     const prevIndex = (currentIndex - 1 + radioItems.length) % radioItems.length;
@@ -108,7 +131,7 @@ export const Radio = ({ radioItems }: { radioItems: ShowcaseRadio[] }) => {
                       <div className={styles.marquee}>
                         <div className={styles.marqueeContent}>
                           {[...Array(2)].map((_, i) => (
-                            <Typography className={styles.title} tag='p' variant='text3'>
+                            <Typography className={styles.title} tag='p' variant='text3' key={i}>
                               {currentSong?.title}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                             </Typography>
                           ))}
@@ -171,10 +194,11 @@ export const Radio = ({ radioItems }: { radioItems: ShowcaseRadio[] }) => {
               onEnded={songEndHandler}
               onLoadedMetadata={handleLoadedMetadata}
               onTimeUpdate={timeUpdateHandler}
+              preload="none"
+              onError={() => console.warn('Ошибка загрузки аудио')}
             />
             <div className={styles.volumeContainer}>
               <Volume audioRef={audioRef} />
-
               <button
                 aria-label='открыть / закрыть'
                 className={classnames(styles.button, tracklist ? styles.close : styles.open)}
