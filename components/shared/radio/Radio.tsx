@@ -114,7 +114,8 @@ export const Radio = ({ radioItems }: { radioItems: ShowcaseRadio[] }) => {
     setCurrentSong(radioItems[nextIndex]);
     setHasMovedForward(true);
   };
-
+  console.log('currentSong', currentSong);
+  console.log('radioItems', radioItems);
   return (
     <section className={styles.wrapper}>
       <div className={styles.container}>
@@ -216,7 +217,7 @@ export const Radio = ({ radioItems }: { radioItems: ShowcaseRadio[] }) => {
       <div className={classnames(styles.trackWrapper, { [styles.open]: tracklist })}>
         {currentSong?.tracklist?.map((track, i) => (
           <Typography key={i} className={styles.track} tag='p' variant='text4'>
-            {track}
+            {track === '__EMPTY__' ? '' : track}
           </Typography>
         ))}
 
